@@ -1,6 +1,6 @@
 # EventStoreML
 
-**EventStoreML** (pronounced *EventStormel*) is a minimal, self-hosting markup language where **everything is an event** - even the schema definitions themselves.  
+**EventStoreML** (pronounced *eventstormel*) is a minimal, self-hosting markup language where **everything is an event** - even the schema definitions themselves.  
 
 Every `.esml` file is an **append-only event log that defines its own meaning over time**.  
 
