@@ -182,7 +182,7 @@ Each type version must reference a single parent version, forming a tree of line
       additionalProperties: false
 ```
 
-Future declarations can then use `core.TypeDeclared@2`.
+Future declarations can then use `core.TypeDeclared@2` as well.
 
 ---
 
