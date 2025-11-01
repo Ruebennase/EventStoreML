@@ -2,7 +2,7 @@
 
 **EventStoreML** (pronounced *eventstormel*) is a minimal, self-hosting markup language where **everything is an event** - even the schema definitions themselves.  
 
-Every `.esml` file is an **append-only event log that defines its own meaning over time**.  
+Every `.esml` file is an **append-only event store that defines its own meaning over time**.  
 
 Its core consists of exactly one must-understand event type, `core.TypeDeclared@1`, expressed in pure JSON Schema.  
 All other types, schemas, and instances are declared, validated, and evolved through events.
@@ -11,7 +11,7 @@ All other types, schemas, and instances are declared, validated, and evolved thr
 
 ## Status: Experimental
 
-> EventStoreML is an active exploration. Its purpose is to test whether event-sourced systems can describe themselves purely through events. Feedback, discussion, and experiments are welcome. The concepts and syntax may change as we evaluate practical viability.
+> EventStoreML is an active exploration. For now its purpose is to test whether event-sourced systems can describe themselves purely through events. Feedback, discussion, and experiments are welcome. The concepts and syntax may change as we evaluate practical viability.
 
 > EventStoreML is not optimized for performance. Its goal is to maximize *eventsourceiness*, to express, store, and evolve everything as events, including schemas themselves. It aims for clarity, lineage, and introspection first, not runtime efficiency.
 
