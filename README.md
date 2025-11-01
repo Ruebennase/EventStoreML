@@ -11,7 +11,7 @@ All other types, schemas, and instances are declared, validated, and evolved thr
 
 ## Status: Experimental
 
-> EventStoreML is an active exploration. Its purpose is to test whether event-sourced systems can describe themselves purely through events. Feedback, discussion, and experiments > are welcome. The concepts and syntax may change as we evaluate practical viability.
+> EventStoreML is an active exploration. Its purpose is to test whether event-sourced systems can describe themselves purely through events. Feedback, discussion, and experiments are welcome. The concepts and syntax may change as we evaluate practical viability.
 
 > EventStoreML is **not optimized for performance**. Its goal is to maximize **event-source-ness** - to express, store, and evolve everything as events, including schemas > themselves. It aims for clarity, lineage, and introspection first, not runtime efficiency.
 
