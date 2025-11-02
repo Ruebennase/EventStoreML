@@ -127,7 +127,7 @@ schema:
       required: ["customer_id","name","address"]
       additionalProperties: false
 
-# 4. Use the declared event
+# 4. Use the declared event type
 - type: "customer.event.CustomerRegistered@1"
   data:
     customer_id: "01J..."
