@@ -4,8 +4,7 @@
 
 Every `.esml` file is an **append-only event store that defines its own meaning over time**.  
 
-Its core consists of exactly one must-understand event type, `core.TypeDeclared@1`, expressed in pure JSON Schema.  
-All other types, schemas, and instances are declared, validated, and evolved through events.
+Its core consists of exactly one must-understand event type, `core.TypeDeclared@1`, expressed in pure JSON Schema. All other types, schemas, and instances are declared, validated, and evolved through events.
 
 Underlying idea: If event sourcing is so good then why not attempt to use event store files where normally state snapshot files are being used (e.g. config files, model markup files, etc.).
 
