@@ -195,7 +195,24 @@ Future declarations can then use `core.TypeDeclared@2` as well.
 
 ---
 
-## Usage
+## Use Cases
+
+It is a bit early to say if and where this goes but currently the expectations are as follows.
+
+### When to Use
+- You want a **self-contained, human-readable event store** that includes both schema and data.
+- You’re building **tools, prototypes, or CLIs** that don’t need a full event-store database yet benefit from event-sourcing.
+- You care about **schema evolution and replayability**, seeing *how* a model or config changed over time.
+
+### When Not to Use
+- You need **concurrency, streaming, or high-volume writes** (use a real event store).
+- You prefer **established tooling or interoperability** (use JSON Schema, Avro, Protobuf, etc.).
+- You only care about **current state**, not event history.
+- You need **binary efficiency or performance-critical storage**.
+
+---
+
+## Validating .esml files
 
 Once a reference parser is available, an EventStoreML file can be parsed and validated as follows:
 
@@ -217,7 +234,7 @@ The parser will:
 1. Reference parser in Python (validate, register, and evolve schemas)  
 2. Specification document derived from this README  
 3. Examples and tests for validation and evolution
-4. Core types for timestamping/signing (minimalistic)
+4. Meta types for timestamping/signing (minimalistic)
 5. Meta types for documentation and governance  
 
 ---
