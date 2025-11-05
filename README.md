@@ -2,11 +2,11 @@
 
 **EventStoreML** (pronounced *eventstormel*) is a minimal, self-hosting markup language where **every top-level element is an event** — even schema definitions themselves.  
 
-Every `.esml` file is an **append-only event store that defines its own meaning over time**.  
+Every `.esml` file is an **append-only event store that defines its own meanings over time through events**.  
 
-Its core consists of exactly one must-understand event type, `core.TypeDeclared@1`, expressed in pure JSON Schema. All other types, schemas, and instances are declared, validated, and evolved through events.
+Its core consists of exactly one must-understand root event type, `core.TypeDeclared@1`, expressed in pure JSON Schema. All other types, schemas, and instances are declared, validated, and evolved through events.
 
-Underlying idea: If event sourcing is so good then why not attempt to use event store files where normally state snapshot files are being used (e.g. config files, model markup files, etc.).
+Underlying idea: If event sourcing is so good then why not attempt to use event store files where normally state snapshot files are being used (e.g. config files, model markup files, etc.). So instead of having multiple file versions a single .esml contains all versions within. 
 
 ---
 
@@ -14,20 +14,19 @@ Underlying idea: If event sourcing is so good then why not attempt to use event 
 
 > EventStoreML is an active exploration. Feedback, discussion, and experiments are welcome. The concepts and syntax may change as we evaluate practical viability.
 
-> EventStoreML is not optimized for performance.
+> EventStoreML is not optimized for performance but for ultimate flexibility and versatility.
 
 ---
 
 ## Why EventStoreML
 
-EventStoreML is based on the event sourcing idea that *events define systems better than current state does*.  
-Instead of storing objects and their mutable state, we capture **facts** and their **schemas** as events.
+EventStoreML is based on the event sourcing idea that a system’s state is often better derived from a complete, ordered log of all events that have occurred, rather than storing only the latest state. Instead of storing objects and their mutable state, we capture both **facts** and their **schemas** as events.
 
 This has several advantages:
 
-* **Self-describing data** - every event store explains itself, without external schema files  
+* **Self-describing data** - every event store explains itself including its potential evolution, without external schema files  
 * **Historical integrity** - schemas evolve through versioned declaration events, preserving lineage  
-* **Bootstrap simplicity** - the entire system can be described using one built-in type  
+* **Bootstrap simplicity** - the entire system can be described, starting from one built-in type  
 * **Composable and reusable** - event types, structures, and meta information can be shared and referenced across projects  
 * **Schema-first thinking** - everything is defined through explicit schemas, not implicit code models
 
@@ -35,23 +34,22 @@ This has several advantages:
 
 ## Core Principles
 
-* **Bootstrap simplicity** - the language defines itself through a single type: `core.TypeDeclared@1`
+* **Bootstrap simplicity** - the language defines itself through a single event type and thus type: `core.TypeDeclared@1`
 * **Schema-first, no state** - all information is expressed as events, never as object state
 * **JSON Schema subset** - uses a safe, minimal subset (type, properties, required, items, $defs, internal $ref)
 * **Namespaces**
   * `core.*` - reserved, must-understand types for parsers  
   * `meta.*` - optional meta or governance layer  
   * others - user or domain namespaces
-* **Declare-before-use** - a type can only appear after it has been declared
-* **Tree rule (single-parent lineage)** - every version of a type must derive from exactly one earlier version
+* **Declare-before-use** - a type can only appear and be used after it has been declared
+* **Tree rule (single-parent lineage)** - every new type or new version of a type must be declared using an already existing type
 * **Opaque extensibility** - anything outside `core.*` is validated against its schema but otherwise semantically opaque
 
 ---
 
 ## Core Type: `core.TypeDeclared@1`
 
-`core.TypeDeclared@1` is the single built-in event type that bootstraps everything else.  
-It declares new types and their schemas.
+`core.TypeDeclared@1` is the single built-in event type that bootstraps everything else. Instances of this event type declare new types and their schemas. Such new types can then be used in schema definitions or as event type of new event instances. An event type can also be a new type-declaring event type...
 
 ### Payload schema (subset of JSON Schema)
 
@@ -67,6 +65,27 @@ schema:
   $defs?: { ... }
   $ref?: "#/$defs/..."
 ```
+
+### File Format and Syntax
+
+An EventStoreML (`.esml`) file is a **time-ordered sequence of events**, where each entry has the structure:
+
+```yaml
+- type: "some.namespace.EventName@version"
+  data: { ... }
+```
+
+**Official serialization:** YAML.  
+YAML is the normative textual representation used in this project and examples.
+
+**Alternate representation:** JSON.  
+JSON is structurally equivalent and may be supported by tooling, but it is not the canonical format in this repository.
+
+**No binary format at this time.**  
+There is currently no standardized binary encoding for EventStoreML in this project.
+
+Parsers must treat the file as a sequential list of `{type, data}` records.  
+The order of events is significant, since later events may depend on earlier type declarations.
 
 ### Parser duties
 
@@ -140,29 +159,6 @@ schema:
 
 ---
 
-## File Format and Syntax
-
-An EventStoreML (`.esml`) file is a **time-ordered sequence of events**, where each entry has the structure:
-
-```yaml
-- type: "some.namespace.EventName@version"
-  data: { ... }
-```
-
-**Official serialization:** YAML.  
-YAML is the normative textual representation used in this project and examples.
-
-**Alternate representation:** JSON.  
-JSON is structurally equivalent and may be supported by tooling, but it is not the canonical format in this repository.
-
-**No binary format at this time.**  
-There is currently no standardized binary encoding for EventStoreML in this project.
-
-Parsers must treat the file as a sequential list of `{type, data}` records.  
-The order of events is significant, since later events may depend on earlier type declarations.
-
----
-
 ## Type Evolution
 
 Each type version must reference a single parent version, forming a tree of lineage.
@@ -231,10 +227,10 @@ The parser will:
 
 ## Roadmap
 
-1. Reference parser in Python (validate, register, and evolve schemas)  
-2. Specification document derived from this README  
+1. A reference parser in Python (to validate schemas)  
+2. A specification document derived from this README  
 3. Examples and tests for validation and evolution
-4. Meta types for timestamping/signing (minimalistic)
+4. Meta types for timestamping/signing/sealing (minimalistic)
 5. Meta types for documentation and governance  
 
 ---
