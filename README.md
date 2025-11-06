@@ -107,11 +107,10 @@ Example:
     "type": "object",
     "properties": {
       "name":    { "type": "string" },
-      "version": { "type": "integer" },
-      "doc":     { "type": "string"},
+      "log":     { "type": "string"},
       "schema":  { "type": "object" }
     },
-    "required": ["name", "version", "schema"],
+    "required": ["name", "schema"],
     "additionalProperties": false
   }
 }}
@@ -170,16 +169,16 @@ If TypeDeclared is deemed insufficient for the desired approach it can be used t
 {"type": "TypeDeclared",
  "data": {
   "name": "custom.TypeDeclared",
-  "doc": "custom.TypeDeclared was declared. It requires a timestamp for each subsequent type declared by it.",
+  "log": "custom.TypeDeclared was declared. It requires a timestamp for each subsequent type declared by it.",
   "schema": {
     "type": "object",
     "properties": {
       "name":      { "type": "string" },
-      "doc":       { "type": "string"},
+      "log":       { "type": "string"},
       "schema":    { "type": "object" },
       "timestamp": { "type": "string"}
     },
-    "required": ["name", "version", "schema", "timestamp"],
+    "required": ["name", "schema", "timestamp"],
     "additionalProperties": false
   }
 }}
