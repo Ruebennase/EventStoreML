@@ -77,10 +77,31 @@ Unlike a standard JSON document, these objects are written in sequence, without 
 Example:
 
 ```json
+{"type": "TypeDeclared", "data": {...}}
 {"type": "some.namespace.EventName", "data": {...}}
 {"type": "some.namespace.EventName@2", "data": {...}}
-{"type": "some.namespace.EventName@2", "data": {...}}
 ```
+
+The typical file structure might look as follows:
+
+- **Self-definition of `TypeDeclared`**  
+  Invariably, the file begins by bootstrapping its own basic type system through a `TypeDeclared` self-declaration. This must be idempotent with what any parser knows as hard-coded declaration and it thus originates how all later types and events are described within the file itself.
+
+- **Optional definition of special type-declaring event types**  
+  Using `TypeDeclared` new type definitions may define special new ways for how to declare other new types, such as `custom.EventTypeDeclared` for declaring event-specific types.
+
+- **Definition of application-specific event types**  
+  Using the one of the above above (for example `custom.EventTypeDeclared`), a number of application-specific event types are declared — these represent the possible event types that can appear later in the file.
+
+- **Optional hashing/signing/locking of the specification**  
+  Up to this point, the file defines everything a tool needs in order to understand the structure of the file: what types exist, what event types exist, and how event instances should be read or written. To fix a specific version or ensure integrity up to this point in time, the specification might be hashed, signed, or otherwise “locked.” This action itself might be represented as an event — a meta-event — indicating that the schema is sealed or verified.
+
+- **Recording of actual application-level events**  
+  After the schema definitions (and optional locking), the file proceeds with application-level event entries. Each event is appended in order and conforms to one of the declared event types, representing occurrences in the system over time.
+
+- **Optional schema evolution and extended tooling**  
+  If the tooling evolves and new event types or type versions become available, additional type declarations can appear later in the file. Tools should therefore handle schema-type events dynamically, supporting extensions and type changes within the event stream itself to some degree.
+
 
 ### Parser duties (WORK IN PROGRESS)
 
