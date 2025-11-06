@@ -4,9 +4,9 @@
 
 Every `.esml` file is an **append-only event store that defines its own meanings over time through events**.  
 
-Its core consists of exactly one must-understand root event type, `core.TypeDeclared@1`, expressed in pure JSON Schema. All other types, schemas, and instances are declared, validated, and evolved through events.
+Its core consists of exactly one must-understand event type, `TypeDeclared`, expressed in pure JSON Schema. All other types, schemas, and instances are declared, validated, and evolved through events.
 
-Underlying idea: If event sourcing is so good then why not attempt to use event store files where normally state snapshot files are being used (e.g. config files, model markup files, etc.). So instead of having multiple file versions a single .esml contains all versions within. 
+Underlying idea: Event sourcing has proven powerful — so why not explore using event store files in places where we usually rely on static state snapshots (like config files or model markup files)?
 
 ---
 
@@ -34,160 +34,159 @@ This has several advantages:
 
 ## Core Principles
 
-* **Bootstrap simplicity** - the language defines itself through a single event type and thus type: `core.TypeDeclared@1`
+* **Bootstrap simplicity** - the language defines itself through a single event type and thus type: `TypeDeclared`
 * **Schema-first, no state** - all information is expressed as events, never as object state
 * **JSON Schema subset** - uses a safe, minimal subset (type, properties, required, items, $defs, internal $ref)
 * **Namespaces**
-  * `core.*` - reserved, must-understand types for parsers  
+  * All types without namespaces (no `.`) are core, reserved, and must-understand types for parsers  
   * `meta.*` - optional meta or governance layer  
   * others - user or domain namespaces
+* **Versions** - types can optionally be given a version tag by appending an @version, e.g @2 or @new
 * **Declare-before-use** - a type can only appear and be used after it has been declared
-* **Tree rule (single-parent lineage)** - every new type or new version of a type must be declared using an already existing type
-* **Opaque extensibility** - anything outside `core.*` is validated against its schema but otherwise semantically opaque
 
 ---
 
-## Core Type: `core.TypeDeclared@1`
+## Core Event Type: `TypeDeclared`
 
-`core.TypeDeclared@1` is the single built-in event type that bootstraps everything else. Instances of this event type declare new types and their schemas. Such new types can then be used in schema definitions or as event type of new event instances. An event type can also be a new type-declaring event type...
+`TypeDeclared` is the single built-in event type that bootstraps everything else. Instances of this event type declare new types and their schemas. Such new types can then be used in schema definitions or as event type of new event instances. An event type can also be a new type-declaring event type...
 
 ### Payload schema (subset of JSON Schema)
 
-```yaml
-name: string
-version: integer
-schema:
-  type: object
-  properties: { ... }
-  required?: [ ... ]
-  additionalProperties?: boolean
-  items?: { ... }
-  $defs?: { ... }
-  $ref?: "#/$defs/..."
+```json
+{
+  "name": "string",
+  "log": "string",
+  "schema": {
+    "type": "object",
+    "properties": { "...": "..." },
+    "required": ["..."],
+    "additionalProperties": true,
+    "items": { "...": "..." },
+    "$defs": { "...": "..." },
+    "$ref": "#/$defs/..."
+  }
+}
 ```
 
 ### File Format and Syntax
 
-An EventStoreML (`.esml`) file is a **time-ordered sequence of events**, where each entry has the structure:
+An EventStoreML (`.esml`) file is a **time-ordered sequence of JSON objects**, each object representing one event in the store. The order of events is significant.
 
-```yaml
-- type: "some.namespace.EventName@version"
-  data: { ... }
+Unlike a standard JSON document, these objects are written in sequence, without commas or enclosing brackets — allowing the file to be **append-only**. Whitespace between these objects is ignored for the parsing of each event but may be significant for any operations processing the file (e.g. secure hash calculations or indexes pointing to events in the file). Again, each file is append-only and any manipulation within leads to unspecified behaviour.
+
+Example 1:
+
+```json
+{"type": "some.namespace.EventName", "data": {...}}
+{"type": "some.namespace.EventName@2", "data": {...}}
+{"type": "some.namespace.EventName@2", "data": {...}}
 ```
 
-**Official serialization:** YAML.  
-YAML is the normative textual representation used in this project and examples.
-
-**Alternate representation:** JSON.  
-JSON is structurally equivalent and may be supported by tooling, but it is not the canonical format in this repository.
-
-**No binary format at this time.**  
-There is currently no standardized binary encoding for EventStoreML in this project.
-
-Parsers must treat the file as a sequential list of `{type, data}` records.  
-The order of events is significant, since later events may depend on earlier type declarations.
-
-### Parser duties
+### Parser duties (WORK IN PROGRESS)
 
 1. Parse the sequence of `{type, data}` items.  
-2. When encountering `core.TypeDeclared@*`:
+2. When encountering `TypeDeclared`:
    * Validate the payload against its schema  
    * Register `(name, version) -> schema`  
    * Enforce *declare-before-use* and *tree rule*
 3. For all other events:
    * Look up their schema in the registry  
    * Validate the data accordingly  
-   * Treat everything outside `core.*` as semantically opaque
+   * Treat everything with a namespace `*.*` as semantically opaque
 
 ---
 
 ## Example `.esml` File
 
-```yaml
-# 1. The declarer itself (built-in for most parsers)
-- type: "core.TypeDeclared@1"
-  data:
-    name: "core.TypeDeclared"
-    version: 1
-    schema:
-      type: object
-      properties:
-        name:    { type: string }
-        version: { type: integer }
-        schema:  { type: object }
-      required: ["name","version","schema"]
-      additionalProperties: false
+```json
+{"type": "TypeDeclared",
+ "data": {
+  "name": "TypeDeclared",
+  "log": "TypeDeclared declared itself.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name":    { "type": "string" },
+      "version": { "type": "integer" },
+      "doc":     { "type": "string"},
+      "schema":  { "type": "object" }
+    },
+    "required": ["name", "version", "schema"],
+    "additionalProperties": false
+  }
+}}
 
-# 2. Declare a struct type
-- type: "core.TypeDeclared@1"
-  data:
-    name: "common.struct.Address"
-    version: 1
-    schema:
-      type: object
-      properties:
-        street: { type: string }
-        city:   { type: string }
-        zip:    { type: string }
-      required: ["street","city","zip"]
-      additionalProperties: false
+{"type": "TypeDeclared",
+ "data": {
+  "name": "common.struct.Address",
+  "log": "The common.struct.Address structure type was declared.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "street": { "type": "string" },
+      "city":   { "type": "string" },
+      "zip":    { "type": "string" }
+    },
+    "required": ["street", "city", "zip"],
+    "additionalProperties": false
+  }
+}}
 
-# 3. Declare an event type
-- type: "core.TypeDeclared@1"
-  data:
-    name: "customer.event.CustomerRegistered"
-    version: 1
-    schema:
-      type: object
-      properties:
-        customer_id: { type: string }
-        name:        { type: string }
-        address:     { $ref: "#/$defs/common.struct.Address@1" }
-      required: ["customer_id","name","address"]
-      additionalProperties: false
+{"type": "TypeDeclared",
+ "data": {
+  "name": "event.CustomerRegistered",
+  "log": "The event.CustomerRegistered event type was declared.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "customer_id": { "type": "string" },
+      "name":        { "type": "string" },
+      "address":     { "$ref": "#/$defs/common.struct.Address" }
+    },
+    "required": ["customer_id", "name", "address"],
+    "additionalProperties": false
+  }
+}}
 
-# 4. Use the declared event type
-- type: "customer.event.CustomerRegistered@1"
-  data:
-    customer_id: "01J..."
-    name: "Ada"
-    address:
-      street: "Main 1"
-      city: "Zürich"
-      zip: "8001"
+{"type": "event.CustomerRegistered",
+ "data": {
+  "customer_id": "0123456789",
+  "name": "Pxxle",
+  "address": {
+    "street": "Bahnhofstrasse 1",
+    "city": "Zürich",
+    "zip": "8001"
+  }
+}}
 ```
 
 ---
 
 ## Type Evolution
 
-Each type version must reference a single parent version, forming a tree of lineage.
+If TypeDeclared is deemed insufficient for the desired approach it can be used to declare another type-declaring event type.
 
-```yaml
-# Declare v2 of the declarer itself using v1
-- type: "core.TypeDeclared@1"
-  data:
-    name: "core.TypeDeclared"
-    version: 2
-    schema:
-      type: object
-      properties:
-        name:    { type: string }
-        version: { type: integer }
-        schema:  { type: object }
-      required: ["name","version","schema"]
-      additionalProperties: false
+```json
+{"type": "TypeDeclared",
+ "data": {
+  "name": "custom.TypeDeclared",
+  "doc": "custom.TypeDeclared was declared. It requires a timestamp for each subsequent type declared by it.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name":      { "type": "string" },
+      "version":   { "type": "integer" },
+      "doc":       { "type": "string"},
+      "schema":    { "type": "object" },
+      "timestamp": { "type": "string"}
+    },
+    "required": ["name", "version", "schema", "timestamp"],
+    "additionalProperties": false
+  }
+}}
 ```
 
-Future declarations can then use `core.TypeDeclared@2` as well.
-
----
-
-## Extensibility
-
-* **Meta namespace** - `meta.*` events can describe documentation, policies, timestamps, signatures, version control, etc.
-* **Profiles and declarers** - specialized declarers (for policies, projections, or other structures) can be introduced later.  
-* **Custom namespaces** - domain types can coexist in the same file and reference each other through `$ref`.
+Future declarations can then use `custom.TypeDeclared` as well. Of course, the tool needs to understand this.
 
 ---
 
@@ -216,10 +215,10 @@ Once a reference parser is available, an EventStoreML file can be parsed and val
 python -m eventstoreml validate mymodel.esml
 ```
 
-The parser will:
+The parser will (WORK IN PROGRESS):
 
 1. Load and parse the `.esml` file.  
-2. Build a type registry from all `core.TypeDeclared` events.  
+2. Build a type registry from all `TypeDeclared` events and...
 3. Validate each subsequent event against its declared schema.  
 4. Report validation results and lineage.
 
@@ -257,5 +256,5 @@ Copyright (c) 2025 EventStoreML contributors
 
 EventStoreML is a minimal, self-hosting markup language where **every top-level element is an event**, including the schema definitions themselves.  
 Each `.esml` file is an event store that defines its own structure and meaning.  
-Its core consists of exactly one must-understand event type, `core.TypeDeclared@1`, expressed in pure JSON Schema.  
+Its core consists of exactly one must-understand event type, `TypeDeclared`, expressed in pure JSON Schema.  
 All other types, schemas, and instances are declared, validated, and evolved through events.
