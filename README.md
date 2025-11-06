@@ -74,7 +74,7 @@ An EventStoreML (`.esml`) file is a **time-ordered sequence of JSON objects**, e
 
 Unlike a standard JSON document, these objects are written in sequence, without commas or enclosing brackets — allowing the file to be **append-only**. Whitespace between these objects is ignored for the parsing of each event but may be significant for any operations processing the file (e.g. secure hash calculations or indexes pointing to events in the file). Again, each file is append-only and any manipulation within leads to unspecified behaviour.
 
-Example 1:
+Example:
 
 ```json
 {"type": "some.namespace.EventName", "data": {...}}
