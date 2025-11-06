@@ -175,7 +175,6 @@ If TypeDeclared is deemed insufficient for the desired approach it can be used t
     "type": "object",
     "properties": {
       "name":      { "type": "string" },
-      "version":   { "type": "integer" },
       "doc":       { "type": "string"},
       "schema":    { "type": "object" },
       "timestamp": { "type": "string"}
