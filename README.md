@@ -246,11 +246,12 @@ The parser will (WORK IN PROGRESS):
 
 ## Roadmap
 
-1. A reference parser in Python (to validate schemas)  
-2. A specification document derived from this README  
-3. Examples and tests for validation and evolution
-4. Meta types for timestamping/signing/sealing (minimalistic)
-5. Meta types for documentation and governance  
+1. Probably better add "$schema": "http://json-schema.org/draft-07/schema#" to schema specs
+2. A reference parser in Python (to validate schemas)
+4. A specification document derived from this README  
+5. Examples and tests for validation and evolution
+6. Meta types for timestamping/signing/sealing (minimalistic)
+7. Meta types for documentation and governance  
 
 ---
 
