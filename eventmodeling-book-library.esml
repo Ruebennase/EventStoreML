@@ -1,0 +1,332 @@
+{"type": "TypeDeclared",
+ "data": {
+  "name": "TypeDeclared",
+  "log": "TypeDeclared declared itself.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" },
+    "log":  { "type": "string" },
+    "schema": { "type": "object" }
+   },
+   "required": ["name", "schema"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.EventTypeDefined",
+  "log": "Declares that a business/event-model-level event exists.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "examplePayload": { "type": "object" }
+   },
+   "required": ["name"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.CommandDefined",
+  "log": "Declares a command in the model.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" },
+    "triggeredBy": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "produces": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+   },
+   "required": ["name"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.ViewDefined",
+  "log": "Declares a read model / view.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "projectionRules": { "type": "object" }
+   },
+   "required": ["name"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.AutomationDefined",
+  "log": "Declares an automation (when ... then ...).",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "when": { "type": "string" },
+    "then": { "type": "string" }
+   },
+   "required": ["when", "then"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.TimelineSwimlaneCreated",
+  "log": "Declares a swimlane/timeline for grouping model elements.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" }
+   },
+   "required": ["name"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.ModelElementRenamed",
+  "log": "Renames a previously declared model element.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "elementId": { "type": "string" },
+    "oldName": { "type": "string" },
+    "newName": { "type": "string" }
+   },
+   "required": ["elementId", "oldName", "newName"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.ElementDeprecated",
+  "log": "Marks a model element as deprecated.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "elementId": { "type": "string" },
+    "reason": { "type": "string" }
+   },
+   "required": ["elementId", "reason"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.ExampleAddedToEvent",
+  "log": "Adds another example payload to an already declared event type.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "eventId": { "type": "string" },
+    "exampleJson": { "type": "object" }
+   },
+   "required": ["eventId", "exampleJson"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "modeling.RelationshipAdded",
+  "log": "Adds a relationship between two model elements.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "fromId": { "type": "string" },
+    "toId": { "type": "string" },
+    "kind": { "type": "string" }
+   },
+   "required": ["fromId", "toId", "kind"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "modeling.TimelineSwimlaneCreated",
+ "data": {
+  "name": "library.circulation"
+ }
+}
+
+{"type": "modeling.EventTypeDefined",
+ "data": {
+  "name": "library.MemberRegistered",
+  "description": "A person becomes a registered library member.",
+  "examplePayload": {
+    "memberId": "mem-001",
+    "fullName": "Alice Example",
+    "registeredAt": "2025-11-07T09:00:00Z"
+  }
+ }
+}
+
+{"type": "modeling.EventTypeDefined",
+ "data": {
+  "name": "library.BookCataloged",
+  "description": "A book is added to the catalog and can be borrowed.",
+  "examplePayload": {
+    "isbn": "978-0132350884",
+    "title": "Clean Code",
+    "catalogedAt": "2025-11-07T09:10:00Z"
+  }
+ }
+}
+
+{"type": "modeling.EventTypeDefined",
+ "data": {
+  "name": "library.BookBorrowed",
+  "description": "A member borrows a copy of a book.",
+  "examplePayload": {
+    "memberId": "mem-001",
+    "isbn": "978-0132350884",
+    "copyId": "copy-cc-01",
+    "borrowedAt": "2025-11-07T09:15:00Z",
+    "dueDate": "2025-11-28"
+  }
+ }
+}
+
+{"type": "modeling.EventTypeDefined",
+ "data": {
+  "name": "library.BookReturned",
+  "description": "A previously borrowed copy is returned.",
+  "examplePayload": {
+    "memberId": "mem-001",
+    "copyId": "copy-cc-01",
+    "returnedAt": "2025-11-10T16:30:00Z"
+  }
+ }
+}
+
+{"type": "modeling.EventTypeDefined",
+ "data": {
+  "name": "library.BorrowDeclined",
+  "description": "Borrow attempt failed due to policy (e.g. max loans reached).",
+  "examplePayload": {
+    "memberId": "mem-002",
+    "isbn": "978-0132350884",
+    "reason": "MaxLoansExceeded",
+    "attemptedAt": "2025-11-07T09:20:00Z"
+  }
+ }
+}
+
+{"type": "modeling.CommandDefined",
+ "data": {
+  "name": "library.BorrowBook",
+  "triggeredBy": [
+    "ui.BorrowButtonClicked"
+  ],
+  "produces": [
+    "library.BookBorrowed",
+    "library.BorrowDeclined"
+  ]
+ }
+}
+
+{"type": "modeling.ViewDefined",
+ "data": {
+  "name": "library.MemberLoansView",
+  "sources": [
+    "library.MemberRegistered",
+    "library.BookBorrowed",
+    "library.BookReturned"
+  ],
+  "projectionRules": {
+    "description": "Keeps current loans per member.",
+    "key": "memberId",
+    "onMemberRegistered": "create empty loan list",
+    "onBookBorrowed": "add copyId + dueDate to member's loans",
+    "onBookReturned": "remove copyId from member's loans"
+  }
+ }
+}
+
+{"type": "modeling.AutomationDefined",
+ "data": {
+  "when": "library.BookBorrowed",
+  "then": "notifications.SendDueDateReminder"
+ }
+}
+
+{"type": "modeling.ExampleAddedToEvent",
+ "data": {
+  "eventId": "library.BookBorrowed",
+  "exampleJson": {
+    "memberId": "mem-003",
+    "isbn": "978-0201616224",
+    "copyId": "copy-tdd-07",
+    "borrowedAt": "2025-11-07T10:00:00Z",
+    "dueDate": "2025-11-21"
+  }
+ }
+}
+
+{"type": "modeling.RelationshipAdded",
+ "data": {
+  "fromId": "library.BorrowBook",
+  "toId": "library.BookBorrowed",
+  "kind": "command-produces-event"
+ }
+}
+
+{"type": "modeling.RelationshipAdded",
+ "data": {
+  "fromId": "library.BorrowBook",
+  "toId": "library.BorrowDeclined",
+  "kind": "command-produces-event"
+ }
+}
+
+{"type": "modeling.RelationshipAdded",
+ "data": {
+  "fromId": "library.BookBorrowed",
+  "toId": "library.MemberLoansView",
+  "kind": "event-updates-view"
+ }
+}
+
+{"type": "modeling.ModelElementRenamed",
+ "data": {
+  "elementId": "library.MemberLoansView",
+  "oldName": "library.MemberLoansView",
+  "newName": "library.MemberActiveLoansView"
+ }
+}
+
+{"type": "modeling.ElementDeprecated",
+ "data": {
+  "elementId": "library.BookCataloged",
+  "reason": "Catalog now populated by upstream MARC import. Use library.ExternalBookImported instead (to be declared)."
+ }
+}
