@@ -18,7 +18,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.EventTypeDefined",
-  "log": "Declares that a business/event-model-level event exists.",
+  "log": "Type modeling.EventTypeDefined was declared. Instances are events defining events of an event model.",
   "schema": {
    "type": "object",
    "properties": {
@@ -35,7 +35,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.CommandDefined",
-  "log": "Declares a command in the model.",
+  "log": "Type modeling.CommandDefined was declared. Instances are events defining commands of an event model.",
   "schema": {
    "type": "object",
    "properties": {
@@ -58,7 +58,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.ViewDefined",
-  "log": "Declares a read model / view.",
+  "log": "Type modeling.ViewDefined was declared. Instances are events defining views of an event model.",
   "schema": {
    "type": "object",
    "properties": {
@@ -78,7 +78,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.AutomationDefined",
-  "log": "Declares an automation (when ... then ...).",
+  "log": "Type modeling.AutomationDefined was declared. Instances are events defining automations.",
   "schema": {
    "type": "object",
    "properties": {
@@ -94,7 +94,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.TimelineSwimlaneCreated",
-  "log": "Declares a swimlane/timeline for grouping model elements.",
+  "log": "Type modeling.TimeLineSwimlaneCreated was declared. Instances are events defining swimlanes.",
   "schema": {
    "type": "object",
    "properties": {
@@ -109,7 +109,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.ModelElementRenamed",
-  "log": "Renames a previously declared model element.",
+  "log": "Type modeling.ModelElementRenamed was declared. Instances are events renaming model elements.",
   "schema": {
    "type": "object",
    "properties": {
@@ -126,7 +126,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.ElementDeprecated",
-  "log": "Marks a model element as deprecated.",
+  "log": "Type modeling.ElementDeprecated was declared. Instances are events marking model elements as deprecated.",
   "schema": {
    "type": "object",
    "properties": {
@@ -142,7 +142,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.ExampleAddedToEvent",
-  "log": "Adds another example payload to an already declared event type.",
+  "log": "Type modeling.ExampleAddedToEvent was declared. Intances are events adding examples to events of the event model.",
   "schema": {
    "type": "object",
    "properties": {
@@ -158,7 +158,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.RelationshipAdded",
-  "log": "Adds a relationship between two model elements.",
+  "log": "Type modeling.RelationshopAdded was declared. Instances are events adding relationships between two event model elements.",
   "schema": {
    "type": "object",
    "properties": {
