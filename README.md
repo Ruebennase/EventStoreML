@@ -185,7 +185,17 @@ Another example is [eventmodeling-book-library.esml](./eventmodeling-book-librar
 
 ## Type Evolution
 
-If TypeDeclared is deemed insufficient for the desired approach it can be used to declare another type-declaring event type.
+EventStoreML has one built-in event type for declaring a type: `TypeDeclared`. An event of `TypeDeclared` must have at least:
+  - `name`: the name of the type to introduce
+  - `schema`: JSON Schema (subset) for that type
+
+When such an event appears, the parser adds that type to its registry.
+
+If `TypeDeclared` is deemed insufficient for the desired approach it can be used to declare another type-declaring event type.
+
+If you declare a new type whose schema itself requires both `name` and `schema`, the parser treats that type as a declarer too when an event of that type later appears.
+- That way, a declarer can declare another declarer, and so on.
+- Types that don’t require both `name` and `schema` are just normal data types. Types with both but not used as event types are just normal data types, too.
 
 ```json
 {"type": "TypeDeclared",
@@ -206,7 +216,7 @@ If TypeDeclared is deemed insufficient for the desired approach it can be used t
 }}
 ```
 
-Future declarations can then use `custom.TypeDeclared` as well. Of course, the tool needs to understand this.
+Future declarations can then use `custom.TypeDeclared` as well. Of course, the file processing tool needs to understand this.
 
 ---
 
@@ -270,12 +280,3 @@ If you want to propose changes to the core spec or parser, please open an issue 
 
 MIT License  
 Copyright (c) 2025 EventStoreML contributors
-
----
-
-## Summary
-
-EventStoreML is a minimal, self-hosting markup language where **every top-level element is an event**, including the schema definitions themselves.  
-Each `.esml` file is an event store that defines its own structure and meaning.  
-Its core consists of exactly one must-understand event type, `TypeDeclared`, expressed in pure JSON Schema.  
-All other types, schemas, and instances are declared, validated, and evolved through events.
