@@ -242,13 +242,13 @@ It is a bit early to say if and where this goes but currently the expectations a
 An EventStoreML file can be parsed and validated as follows:
 
 ```bash
-python -m eventstoreml.py mymodel.esml
+python eventstoreml.py mymodel.esml
 ```
 
 Alternatively it can provide a summary with the types defined and the count of events of certain event types:
 
 ```bash
-python -m eventstoreml.py --summary mymodel.esml
+python eventstoreml.py --summary mymodel.esml
 ```
 
 ---
