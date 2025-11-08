@@ -33,25 +33,6 @@
  }
 }
 
-{"type": "TypeDeclared",
- "data": {
-  "name": "my.TypeDeclared",
-  "log": "Type my.TypeDeclared was declared. Instances are events defining types like TypeDeclared but adding a joke.",
-  "schema": {
-   "type": "object",
-   "properties": {
-    "name": { "type": "string" },
-    "name2": { "type": "string" },
-    "log":  { "type": "string" },
-    "joke": { "type": "string" },
-    "schema": { "type": "object" }
-   },
-   "required": ["name", "joke", "schema"],
-   "additionalProperties": false
-  }
- }
-}
-
 {"type": "my.TypeDeclared",
  "data": {
   "name": "common.struct.Address",
