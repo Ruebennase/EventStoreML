@@ -1,7 +1,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "TypeDeclared",
-  "log": "TypeDeclared declared itself.",
+  "log": "TypeDeclared declared itself for bootstrapping.",
   "schema": {
    "type": "object",
    "properties": {
@@ -10,6 +10,79 @@
     "schema": { "type": "object" }
    },
    "required": ["name", "schema"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "my.TypeDeclared",
+  "log": "Type my.TypeDeclared was declared. Instances are events defining types like TypeDeclared but adding a joke.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" },
+    "log":  { "type": "string" },
+    "joke": { "type": "string" },
+    "schema": { "type": "object" }
+   },
+   "required": ["name", "joke", "schema"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "TypeDeclared",
+ "data": {
+  "name": "my.TypeDeclared",
+  "log": "Type my.TypeDeclared was declared. Instances are events defining types like TypeDeclared but adding a joke.",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" },
+    "name2": { "type": "string" },
+    "log":  { "type": "string" },
+    "joke": { "type": "string" },
+    "schema": { "type": "object" }
+   },
+   "required": ["name", "joke", "schema"],
+   "additionalProperties": false
+  }
+ }
+}
+
+{"type": "my.TypeDeclared",
+ "data": {
+  "name": "common.struct.Address",
+  "log": "The common.struct.Address structure type was declared.",
+  "joke": "An American, an Englishman, and a German...",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "street": { "type": "string" },
+      "city":   { "type": "string" },
+      "zip":    { "type": "string" }
+    },
+    "required": ["street", "city", "zip"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "my.TypeDeclared",
+ "data": {
+  "name": "modeling.EventTypeDefinedSpecial",
+  "log": "Type modeling.EventTypeDefinedSpecial was declared. Instances are events defining events of an event model.",
+  "joke": "An American, an Englishman, and a German...",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "examplePayload": { "type": "object" },
+    "address":     { "$ref": "#/$defs/common.struct.Address" }
+   },
+   "required": ["name"],
    "additionalProperties": false
   }
  }
@@ -237,6 +310,24 @@
     "isbn": "978-0132350884",
     "reason": "MaxLoansExceeded",
     "attemptedAt": "2025-11-07T09:20:00Z"
+  }
+ }
+}
+
+{"type": "modeling.EventTypeDefinedSpecial",
+ "data": {
+  "name": "library.BorrowDeclined",
+  "description": "Borrow attempt failed due to policy (e.g. max loans reached).",
+  "examplePayload": {
+    "memberId": "mem-002",
+    "isbn": "978-0132350884",
+    "reason": "MaxLoansExceeded",
+    "attemptedAt": "2025-11-07T09:20:00Z"
+  },
+  "address": {
+    "street": "Bahnhofstrasse 1",
+    "city": "Zürich",
+    "zip": "8001"
   }
  }
 }
