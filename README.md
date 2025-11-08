@@ -239,25 +239,23 @@ It is a bit early to say if and where this goes but currently the expectations a
 
 ## Validating .esml files
 
-Once a reference parser is available, an EventStoreML file can be parsed and validated as follows:
+An EventStoreML file can be parsed and validated as follows:
 
 ```bash
-python -m eventstoreml validate mymodel.esml
+python -m eventstoreml.py mymodel.esml
 ```
 
-The parser will (WORK IN PROGRESS):
+Alternatively it can provide a summary with the types defined and the count of events of certain event types:
 
-1. Load and parse the `.esml` file.  
-2. Build a type registry from all `TypeDeclared` events and...
-3. Validate each subsequent event against its declared schema.  
-4. Report validation results and lineage.
+```bash
+python -m eventstoreml.py --summary mymodel.esml
+```
 
 ---
 
 ## Roadmap
 
-1. Probably better add "$schema": "http://json-schema.org/draft-07/schema#" to schema specs
-2. A reference parser in Python (to validate schemas)
+1. Maybe better add "$schema": "http://json-schema.org/draft-07/schema#" to schema specs
 4. A specification document derived from this README  
 5. Examples and tests for validation and evolution
 6. Meta types for timestamping/signing/sealing (minimalistic)
