@@ -148,7 +148,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.TimelineSwimlaneCreated",
-  "log": "Type modeling.TimeLineSwimlaneCreated was declared. Instances are events defining swimlanes.",
+  "log": "Type modeling.TimelineSwimlaneCreated was declared. Instances are events defining swimlanes.",
   "schema": {
    "type": "object",
    "properties": {
@@ -196,7 +196,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.ExampleAddedToEvent",
-  "log": "Type modeling.ExampleAddedToEvent was declared. Intances are events adding examples to events of the event model.",
+  "log": "Type modeling.ExampleAddedToEvent was declared. Instances are events adding examples to events of the event model.",
   "schema": {
    "type": "object",
    "properties": {
@@ -212,7 +212,7 @@
 {"type": "TypeDeclared",
  "data": {
   "name": "modeling.RelationshipAdded",
-  "log": "Type modeling.RelationshopAdded was declared. Instances are events adding relationships between two event model elements.",
+  "log": "Type modeling.RelationshipAdded was declared. Instances are events adding relationships between two event model elements.",
   "schema": {
    "type": "object",
    "properties": {
@@ -297,7 +297,7 @@
 
 {"type": "modeling.EventTypeDefinedSpecial",
  "data": {
-  "name": "library.BorrowDeclined",
+  "name": "library.BorrowDeclinedSpecial",
   "description": "Borrow attempt failed due to policy (e.g. max loans reached).",
   "examplePayload": {
     "memberId": "mem-002",
