@@ -259,7 +259,8 @@ python eventstoreml.py --summary mymodel.esml
 4. A specification document derived from this README  
 5. Examples and tests for validation and evolution
 6. Meta types for timestamping/signing/sealing (minimalistic)
-7. Meta types for documentation and governance  
+7. Meta types for documentation and governance
+8. Generally Unix-y tooling that supports reading, projecting, appending, transforming, piping etc. .esml files (integrates with jq...)
 
 ---
 
