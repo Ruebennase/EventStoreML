@@ -399,6 +399,6 @@
 {"type": "modeling.ElementDeprecated",
  "data": {
   "elementId": "library.BookCataloged",
-  "reason": "Catalog now populated by upstream MARC import. Use library.ExternalBookImported instead (to be declared)."
+  "reason": "Catalog now populated by upstream import. Use library.ExternalBookImported instead (to be declared)."
  }
 }
