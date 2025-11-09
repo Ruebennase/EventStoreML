@@ -183,7 +183,7 @@ Another example is [eventmodeling-book-library.esml](./eventmodeling-book-librar
 
 ---
 
-## Type Evolution
+## Other Type Declaring Types
 
 EventStoreML has one built-in event type for declaring a type: `TypeDeclared`. An event of `TypeDeclared` must have at least:
   - `name`: the name of the type to introduce
@@ -191,10 +191,10 @@ EventStoreML has one built-in event type for declaring a type: `TypeDeclared`. A
 
 When such an event appears, the parser adds that type to its registry.
 
-If `TypeDeclared` is deemed insufficient for the desired approach it can be used to declare another type-declaring event type.
+If `TypeDeclared` is deemed insufficient for your desired approach it can be used to declare another type-declaring event type.
 
 If you declare a new type whose schema itself requires both `name` and `schema`, the parser treats that type as a declarer too when an event of that type later appears.
-- That way, a declarer can declare another declarer, and so on.
+- That way, a declarer can declare another declarer, and so on - while a general parser can still validate the entire file.
 - Types that don’t require both `name` and `schema` are just normal data types. Types with both but not used as event types are just normal data types, too.
 
 ```json
