@@ -77,9 +77,9 @@ Unlike a standard JSON document, these objects are written in sequence, without 
 Example:
 
 ```json
-{"type": "TypeDeclared", "data": {...}}
+{"type": "TypeDeclared", "data": {...TypeDeclared...}}
+{"type": "TypeDeclared", "data": {...some.namespace.EventName...}}
 {"type": "some.namespace.EventName", "data": {...}}
-{"type": "some.namespace.EventName@2", "data": {...}}
 ```
 
 The typical file structure might look as follows:
