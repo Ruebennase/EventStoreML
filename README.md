@@ -183,7 +183,7 @@ Another example is [eventmodeling-book-library.esml](./eventmodeling-book-librar
 
 ---
 
-## Other Type Declaring Types
+## Other Type-Declaring Types
 
 EventStoreML has one built-in event type for declaring a type: `TypeDeclared`. An event of `TypeDeclared` must have at least:
   - `name`: the name of the type to introduce
