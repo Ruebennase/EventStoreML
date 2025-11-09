@@ -4,7 +4,7 @@
 
 Every `.esml` file is an **append-only event store that defines its own meanings over time through events**.  
 
-Its core consists of exactly one must-understand event type, `TypeDeclared`, expressed in pure JSON Schema. All other types, schemas, and instances are declared, validated, and evolved through events.
+Its core consists of exactly one must-understand event type, `TypeDeclared`, expressed in JSON Schema. All other types, schemas, and instances are declared, validated, and evolved through events.
 
 Underlying idea: Event sourcing has proven powerful — so why not explore using event store files in places where we usually rely on static state snapshots (like config files or model markup files)?
 
@@ -24,8 +24,8 @@ EventStoreML is based on the event sourcing idea that a system’s state is ofte
 
 This has several advantages:
 
-* **Self-describing data** - every event store explains itself including its potential evolution, without external schema files  
-* **Historical integrity** - schemas evolve through versioned declaration events, preserving lineage  
+* **Self-describing data** - every event store explains itself including its potential schema evolution, without any external schema files  
+* **Historical integrity** - schemas evolve through type declaration events, preserving lineage  
 * **Bootstrap simplicity** - the entire system can be described, starting from one built-in type  
 * **Composable and reusable** - event types, structures, and meta information can be shared and referenced across projects  
 * **Schema-first thinking** - everything is defined through explicit schemas, not implicit code models
@@ -38,11 +38,11 @@ This has several advantages:
 * **Schema-first, no state** - all information is expressed as events, never as object state
 * **JSON Schema subset** - uses a safe, minimal subset (type, properties, required, items, $defs, internal $ref)
 * **Namespaces**
-  * All types without namespaces (no `.`) are core, reserved, and must-understand types for parsers  
-  * `meta.*` - optional meta or governance layer  
-  * others - user or domain namespaces
-* **Versions** - types can optionally be given a version tag by appending an @version, e.g @2 or @new
-* **Declare-before-use** - a type can only appear and be used after it has been declared
+  * All types without namespaces (no `.` in type name) are core, reserved, and must-understand types for parsers  
+  * `meta.*` - is suggested for optional meta or governance event types  
+  * others - user or domain namespaces; standard namespaces might emerge
+* **Versions** - types can optionally be given a version tag by appending an @version identifier to the name, e.g @2 or @new
+* **Declare-before-use** - a type can only be used after its type declaration event in the file itself
 
 ---
 
@@ -72,7 +72,7 @@ This has several advantages:
 
 An EventStoreML (`.esml`) file is a **time-ordered sequence of JSON objects**, each object representing one event in the store. The order of events is significant.
 
-Unlike a standard JSON document, these objects are written in sequence, without commas or enclosing brackets — allowing the file to be **append-only**. Whitespace between these objects is ignored for the parsing of each event (NDJSON and JSONL are fine, just stricter) but may be significant for any operations processing the file (e.g. secure hash calculations or indexes pointing to events in the file). Again, each file is append-only and any manipulation within leads to unspecified behaviour. 
+Unlike a standard JSON document, these objects are written in sequence, without separating commas or enclosing brackets — allowing the file to be **append-only**. Whitespace between these objects is ignored for the parsing of each event (NDJSON and JSONL are fine, just stricter) but may be significant for any operations processing the file (e.g. secure hash calculations or indexes pointing to events in the file). Again, each file is append-only and any change within leads to unspecified behaviour. 
 
 Example:
 
@@ -103,18 +103,6 @@ The typical file structure might look as follows:
   If the tooling evolves and new event types or type versions become available, additional type declarations can appear later in the file. Tools should therefore handle schema-type events dynamically, supporting extensions and type changes within the event stream itself to some degree.
 
 Another example is [eventmodeling-book-library.esml](./eventmodeling-book-library.esml). In this we define first the - **admittedly not super sensible** - types of events that can happen during any event modeling session, then apply these event types in event instances that mimic what happens then during an event modeling session for modeling use cases occuring in a library. Unlike the versioning of complete modified event model files representing the state after each modeling session such an approach would allow to track what has actually changed in the model and possibly the intentions behind changes apart from timings, etc. Another test balloon to ponder.
-
-### Parser duties (WORK IN PROGRESS)
-
-1. Parse the sequence of `{type, data}` items.  
-2. When encountering `TypeDeclared`:
-   * Validate the payload against its schema  
-   * Register `(name, version) -> schema`  
-   * Enforce *declare-before-use* and *tree rule*
-3. For all other events:
-   * Look up their schema in the registry  
-   * Validate the data accordingly  
-   * Treat everything with a namespace `*.*` as semantically opaque
 
 ---
 
@@ -200,8 +188,8 @@ If you declare a new type whose schema itself requires both `name` and `schema`,
 ```json
 {"type": "TypeDeclared",
  "data": {
-  "name": "custom.TypeDeclared",
-  "log": "custom.TypeDeclared was declared. It requires a timestamp for each subsequent type declared by it.",
+  "name": "custom.EventTypeDeclared",
+  "log": "Type custom.EventTypeDeclared was declared. It is for declaring event types and requires a timestamp for each type declaration.",
   "schema": {
     "type": "object",
     "properties": {
@@ -216,7 +204,7 @@ If you declare a new type whose schema itself requires both `name` and `schema`,
 }}
 ```
 
-Future declarations can then use `custom.TypeDeclared` as well. Of course, the file processing tool needs to understand this.
+Future event type declarations can then use `custom.EventTypeDeclared` as well. Of course, the file processing tool needs to understand this.
 
 ---
 
@@ -239,7 +227,7 @@ It is a bit early to say if and where this goes but currently the expectations a
 
 ## Validating .esml files
 
-An EventStoreML file can be parsed and validated as follows:
+An EventStoreML file can be parsed and validated with the provided eventstoreml.py tool as follows:
 
 ```bash
 python eventstoreml.py mymodel.esml
@@ -260,18 +248,13 @@ python eventstoreml.py --summary mymodel.esml
 5. Examples and tests for validation and evolution
 6. Meta types for timestamping/signing/sealing (minimalistic)
 7. Meta types for documentation and governance
-8. Generally Unix-y tooling that supports reading, projecting, appending, transforming, piping etc. .esml files (integrates with jq...)
+8. Generally Unix-y tooling that supports reading, projecting, appending, transforming, piping etc. (should work with `jq` for example)
 
 ---
 
 ## Contributing
 
-Feedback and contributions are welcome!
-If you want to propose changes to the core spec or parser, please open an issue describing:
-
-* the motivation for your change  
-* any potential compatibility or tooling impact  
-* example `.esml` files demonstrating the idea, if sensible
+Feedback and contributions are welcome! Nonsense? Useful? Suggestions?
 
 ---
 
