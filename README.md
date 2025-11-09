@@ -43,6 +43,7 @@ This has several advantages:
   * others - user or domain namespaces; standard namespaces might emerge
 * **Versions** - types can optionally be given a version tag by appending an @version identifier to the name, e.g @2 or @new
 * **Declare-before-use** - a type can only be used after its type declaration event in the file itself
+* **Type redeclaration allowed** - All types except TypeDeclared may be re-declared. Better is to version them of course.
 
 ---
 
