@@ -111,6 +111,8 @@ Another example is [eventsourced-openapi-todolist.esml](./eventsourced-openapi-t
 
 Another example is [eventsourced-properties-config.esml](./eventsourced-properties-config.esml). In this we define first the - **admittedly ad-hoc chosen** - types of events that can happen during any properties configuration and re-configuration session, then apply these event types in event instances that mimic what happens then during a configuration session for some application config. Unlike the versioning of complete modified properties files representing the state after each (re-)configuration session such an approach would allow to track what has actually changed in the configuration and possibly the intentions behind changes apart from timings, etc. The sample [project-properties.py](./project-properties.py) then projects the latest properties config file to stdout.
 
+Another example is [eventsourced-bpmn-sample.esml](./eventsourced-bpmn-sample.esml). In this we define first the - **admittedly ad-hoc chosen** - types of events that can happen during any BPMN modeling session, then apply these event types in event instances that mimic what happens then during a BPMN modeling session for modeling a sample use case of invoice processing. Unlike the versioning of complete modified BPMN XML files representing the state after each modeling session such an approach would allow to track what has actually changed in the model and possibly the intentions behind changes apart from timings, etc. The sample [project-bpmn.py](./project-bpmn.py) then projects the latest BPMN model as BPMN2.0 XML to stdout (as this projector doesn't do automagic diagram layouting it looks a bit crappy in e.g. the free bpmn.io tool).
+
 ---
 
 ## Example `.esml` File
