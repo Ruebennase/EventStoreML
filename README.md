@@ -103,7 +103,7 @@ The typical file structure might look as follows:
 - **Optional schema evolution and extended tooling**  
   If the tooling evolves and new event types or type versions become available, additional type declarations can appear later in the file. Tools should therefore handle schema-type events dynamically, supporting extensions and type changes within the event stream itself to some degree.
 
-Another example is [eventmodeling-book-library.esml](./eventmodeling-book-library.esml). In this we define first the - **admittedly not super sensible** - types of events that can happen during any event modeling session, then apply these event types in event instances that mimic what happens then during an event modeling session for modeling use cases occuring in a library. Unlike the versioning of complete modified event model files representing the state after each modeling session such an approach would allow to track what has actually changed in the model and possibly the intentions behind changes apart from timings, etc. Another test balloon to ponder.
+Another example is [eventsourced-eventmodel-library.esml](./eventsourced-eventmodel-library.esml). In this we define first the - **admittedly not so sensible** - types of events that can happen during any event modeling session, then apply these event types in event instances that mimic what happens then during an event modeling session for modeling use cases occuring in a library. Unlike the versioning of complete modified event model files representing the state after each modeling session such an approach would allow to track what has actually changed in the model and possibly the intentions behind changes apart from timings, etc. Another test balloon to ponder.
 
 ---
 
