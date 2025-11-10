@@ -8,7 +8,7 @@ Its core consists of exactly one must-understand event type, `TypeDeclared`, exp
 
 Underlying idea: Event sourcing has proven powerful — so why not explore using event store files in places where we usually rely on static state snapshots (like config files or model markup files)?
 
-Fancy a complication of the complication? Try [The EventStoreMLer](https://chatgpt.com/g/g-69123cbb21448191940f86454b5632cc-the-eventstoremler)
+Fancy a complication of the complication? Try [The EventStoreMLer](https://chatgpt.com/g/g-69123cbb21448191940f86454b5632cc-the-eventstoremler).
 
 ---
 
