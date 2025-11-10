@@ -1,0 +1,393 @@
+{"type": "TypeDeclared", "data": {
+  "name": "TypeDeclared",
+  "log": "TypeDeclared declared itself.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": { "type": "string" },
+      "log": { "type": "string" },
+      "schema": { "type": "object" }
+    },
+    "required": ["name", "schema"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.ProcessDeclared",
+  "log": "A BPMN process was declared.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "name":       { "type": "string" }
+    },
+    "required": ["process_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.PoolDeclared",
+  "log": "A BPMN pool was declared for collaborative modeling.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "pool_id":    { "type": "string" },
+      "name":       { "type": "string" },
+      "process_id": { "type": "string" }
+    },
+    "required": ["pool_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.LaneDeclared",
+  "log": "A BPMN lane was declared within a pool or process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "lane_id":    { "type": "string" },
+      "name":       { "type": "string" },
+      "pool_id":    { "type": "string" },
+      "process_id": { "type": "string" }
+    },
+    "required": ["lane_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.ElementAssignedToLane",
+  "log": "A BPMN element was assigned to a lane.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "lane_id":    { "type": "string" },
+      "element_id": { "type": "string" }
+    },
+    "required": ["process_id", "lane_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.StartEventDeclared",
+  "log": "A BPMN start event was declared for a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "element_id": { "type": "string" },
+      "name":       { "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.EndEventDeclared",
+  "log": "A BPMN end event was declared for a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "element_id": { "type": "string" },
+      "name":       { "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.IntermediateCatchEventDeclared",
+  "log": "A BPMN intermediate catch event was declared for a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "element_id": { "type": "string" },
+      "name":       { "type": "string" },
+      "event_def":  { "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.IntermediateThrowEventDeclared",
+  "log": "A BPMN intermediate throw event was declared for a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "element_id": { "type": "string" },
+      "name":       { "type": "string" },
+      "event_def":  { "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.TaskDeclared",
+  "log": "A BPMN task was declared for a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "element_id": { "type": "string" },
+      "name":       { "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.ExclusiveGatewayDeclared",
+  "log": "A BPMN exclusive gateway was declared for a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id":  { "type": "string" },
+      "element_id":  { "type": "string" },
+      "name":        { "type": "string" },
+      "default_flow":{ "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.ParallelGatewayDeclared",
+  "log": "A BPMN parallel gateway was declared for a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "element_id": { "type": "string" },
+      "name":       { "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.SequenceFlowDeclared",
+  "log": "A BPMN sequence flow was declared between two elements.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "flow_id":    { "type": "string" },
+      "source_id":  { "type": "string" },
+      "target_id":  { "type": "string" },
+      "name":       { "type": "string" },
+      "condition":  { "type": "string" }
+    },
+    "required": ["process_id", "flow_id", "source_id", "target_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.MessageFlowDeclared",
+  "log": "A BPMN message flow was declared between participants.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "message_flow_id":    { "type": "string" },
+      "source_element_id":  { "type": "string" },
+      "target_element_id":  { "type": "string" },
+      "name":               { "type": "string" }
+    },
+    "required": ["message_flow_id", "source_element_id", "target_element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.SubProcessDeclared",
+  "log": "A BPMN embedded subprocess was declared within a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id": { "type": "string" },
+      "element_id": { "type": "string" },
+      "name":       { "type": "string" }
+    },
+    "required": ["process_id", "element_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "bpmn.CallActivityDeclared",
+  "log": "A BPMN call activity was declared to call another process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id":     { "type": "string" },
+      "element_id":     { "type": "string" },
+      "name":           { "type": "string" },
+      "called_process": { "type": "string" }
+    },
+    "required": ["process_id", "element_id", "called_process"],
+    "additionalProperties": false
+  }
+}}
+{"type": "bpmn.ProcessDeclared", "data": {
+  "process_id": "invoice.approval",
+  "name": "Invoice approval process"
+}}
+{"type": "bpmn.PoolDeclared", "data": {
+  "pool_id": "Pool_Accounting",
+  "name": "Accounting",
+  "process_id": "invoice.approval"
+}}
+{"type": "bpmn.PoolDeclared", "data": {
+  "pool_id": "Pool_Vendor",
+  "name": "Vendor",
+  "process_id": "invoice.approval"
+}}
+{"type": "bpmn.LaneDeclared", "data": {
+  "lane_id": "Lane_Clerk",
+  "name": "Clerk",
+  "pool_id": "Pool_Accounting",
+  "process_id": "invoice.approval"
+}}
+{"type": "bpmn.LaneDeclared", "data": {
+  "lane_id": "Lane_Manager",
+  "name": "Manager",
+  "pool_id": "Pool_Accounting",
+  "process_id": "invoice.approval"
+}}
+{"type": "bpmn.StartEventDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "StartEvent_InvoiceReceived",
+  "name": "Invoice received"
+}}
+{"type": "bpmn.ElementAssignedToLane", "data": {
+  "process_id": "invoice.approval",
+  "lane_id": "Lane_Clerk",
+  "element_id": "StartEvent_InvoiceReceived"
+}}
+{"type": "bpmn.TaskDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "Task_Submit",
+  "name": "Check & submit invoice"
+}}
+{"type": "bpmn.ElementAssignedToLane", "data": {
+  "process_id": "invoice.approval",
+  "lane_id": "Lane_Clerk",
+  "element_id": "Task_Submit"
+}}
+{"type": "bpmn.ExclusiveGatewayDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "Gateway_AmountCheck",
+  "name": "Amount > threshold?",
+  "default_flow": "Flow_ApproveDirect"
+}}
+{"type": "bpmn.TaskDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "Task_ManagerApprove",
+  "name": "Manager approval"
+}}
+{"type": "bpmn.ElementAssignedToLane", "data": {
+  "process_id": "invoice.approval",
+  "lane_id": "Lane_Manager",
+  "element_id": "Task_ManagerApprove"
+}}
+{"type": "bpmn.EndEventDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "EndEvent_Approved",
+  "name": "Invoice approved"
+}}
+{"type": "bpmn.EndEventDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "EndEvent_Rejected",
+  "name": "Invoice rejected"
+}}
+{"type": "bpmn.SequenceFlowDeclared", "data": {
+  "process_id": "invoice.approval",
+  "flow_id": "Flow_StartToSubmit",
+  "source_id": "StartEvent_InvoiceReceived",
+  "target_id": "Task_Submit",
+  "name": "receive to submit"
+}}
+{"type": "bpmn.SequenceFlowDeclared", "data": {
+  "process_id": "invoice.approval",
+  "flow_id": "Flow_SubmitToGateway",
+  "source_id": "Task_Submit",
+  "target_id": "Gateway_AmountCheck",
+  "name": "submit to decision"
+}}
+{"type": "bpmn.SequenceFlowDeclared", "data": {
+  "process_id": "invoice.approval",
+  "flow_id": "Flow_ApproveDirect",
+  "source_id": "Gateway_AmountCheck",
+  "target_id": "EndEvent_Approved",
+  "name": "approve directly",
+  "condition": "amount <= threshold"
+}}
+{"type": "bpmn.SequenceFlowDeclared", "data": {
+  "process_id": "invoice.approval",
+  "flow_id": "Flow_NeedsManager",
+  "source_id": "Gateway_AmountCheck",
+  "target_id": "Task_ManagerApprove",
+  "name": "needs manager approval",
+  "condition": "amount > threshold"
+}}
+{"type": "bpmn.SequenceFlowDeclared", "data": {
+  "process_id": "invoice.approval",
+  "flow_id": "Flow_ManagerToApproved",
+  "source_id": "Task_ManagerApprove",
+  "target_id": "EndEvent_Approved",
+  "name": "manager approved"
+}}
+{"type": "bpmn.SubProcessDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "SubProcess_Clarify",
+  "name": "Clarify with vendor"
+}}
+{"type": "bpmn.StartEventDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "StartEvent_Clarify",
+  "name": "Clarification started"
+}}
+{"type": "bpmn.TaskDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "Task_CallVendor",
+  "name": "Call vendor"
+}}
+{"type": "bpmn.EndEventDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "EndEvent_Clarified",
+  "name": "Clarification done"
+}}
+{"type": "bpmn.SequenceFlowDeclared", "data": {
+  "process_id": "invoice.approval",
+  "flow_id": "Flow_Clarify_StartToCall",
+  "source_id": "StartEvent_Clarify",
+  "target_id": "Task_CallVendor",
+  "name": "start to call"
+}}
+{"type": "bpmn.SequenceFlowDeclared", "data": {
+  "process_id": "invoice.approval",
+  "flow_id": "Flow_Clarify_CallToEnd",
+  "source_id": "Task_CallVendor",
+  "target_id": "EndEvent_Clarified",
+  "name": "call to done"
+}}
+{"type": "bpmn.MessageFlowDeclared", "data": {
+  "message_flow_id": "Msg_QuestionToVendor",
+  "source_element_id": "Task_CallVendor",
+  "target_element_id": "Pool_Vendor",
+  "name": "send clarification question"
+}}
+{"type": "bpmn.MessageFlowDeclared", "data": {
+  "message_flow_id": "Msg_ResponseFromVendor",
+  "source_element_id": "Pool_Vendor",
+  "target_element_id": "Task_CallVendor",
+  "name": "receive clarification response"
+}}
+{"type": "bpmn.CallActivityDeclared", "data": {
+  "process_id": "invoice.approval",
+  "element_id": "CallActivity_Clarify",
+  "name": "Clarify invoice",
+  "called_process": "invoice.approval"
+}}
