@@ -131,22 +131,49 @@ class ESMLValidator:
             self.event_count += 1
 
     def get_summary(self) -> str:
+        # build type sets
+        # self.declared_types is collected only when collect_summary=True
+        # it's a list of (name, version) tuples, so make it unique
+        all_types = set(self.declared_types)
+        declarer_types = set(self.declarator_candidates)
+        non_declarer_types = all_types - declarer_types
+
         lines: List[str] = []
+
+        # 1) events
         lines.append(f"Total events: {self.event_count}")
-        lines.append(f"Type-declaring events: {self.declarer_event_count}")
-        lines.append(f"Normal events: {self.normal_event_count}")
-        lines.append(f"Declared types (unique): {len(self.declared_types)}")
-        if self.declarator_candidates:
-            lines.append("Declarer-capable types:")
-            for name, ver in sorted(self.declarator_candidates):
-                tname = name if ver is None else f"{name}@{ver}"
-                lines.append(f"  - {tname}")
-        if self.event_type_counts:
-            lines.append("Event counts by type:")
-            for (name, ver), cnt in sorted(self.event_type_counts.items()):
-                tname = name if ver is None else f"{name}@{ver}"
-                lines.append(f"  - {tname}: {cnt}")
+        lines.append(f"  Type-declaring events: {self.declarer_event_count}")
+        lines.append(f"  Non-type-declaring events: {self.normal_event_count}")
+        lines.append("")
+
+        # 2) types
+        lines.append(f"Total types (unique): {len(all_types)}")
+        lines.append(f"  Type-declaring-capable types (unique): {len(declarer_types)}")
+        lines.append(f"  Non-type-declaring-capable types (unique): {len(non_declarer_types)}")
+        lines.append("")
+
+        # 3) list of type-declaring-capable types
+        lines.append("Type-declaring-capable types:")
+        for name, ver in sorted(declarer_types):
+            tname = name if ver is None else f"{name}@{ver}"
+            lines.append(f"  - {tname}")
+        lines.append("")
+
+        # 4) list of non-type-declaring-capable types
+        lines.append("Non-type-declaring-capable types:")
+        for name, ver in sorted(non_declarer_types):
+            tname = name if ver is None else f"{name}@{ver}"
+            lines.append(f"  - {tname}")
+        lines.append("")
+
+        # 5) event counts by event type
+        lines.append("Event counts by type:")
+        for (name, ver), cnt in sorted(self.event_type_counts.items()):
+            tname = name if ver is None else f"{name}@{ver}"
+            lines.append(f"  - {tname}: {cnt}")
+
         return "\n".join(lines)
+
 
     # -------- internals --------
 
