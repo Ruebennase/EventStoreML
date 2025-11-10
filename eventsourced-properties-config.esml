@@ -1,0 +1,127 @@
+{"type": "TypeDeclared", "data": {
+  "name": "TypeDeclared",
+  "log": "TypeDeclared declares itself.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": { "type": "string" },
+      "log": { "type": "string" },
+      "schema": { "type": "object" }
+    },
+    "required": ["name", "schema"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "config.PropertiesFileDeclared",
+  "log": "Declares a logical properties file that will receive key–value change events.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id": { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["config_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "config.PropertySet",
+  "log": "Sets or updates a property key to a given value.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id": { "type": "string" },
+      "key": { "type": "string" },
+      "value": {},
+      "comment": { "type": "string" }
+    },
+    "required": ["config_id", "key", "value"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "config.PropertyRemoved",
+  "log": "Removes a property key from the properties file.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id": { "type": "string" },
+      "key": { "type": "string" }
+    },
+    "required": ["config_id", "key"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "config.PropertyRenamed",
+  "log": "Renames a property key, preserving its last value.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id": { "type": "string" },
+      "old_key": { "type": "string" },
+      "new_key": { "type": "string" }
+    },
+    "required": ["config_id", "old_key", "new_key"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "config.NamespaceDeclared",
+  "log": "Declares a logical namespace for grouping related properties.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id": { "type": "string" },
+      "namespace": { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["config_id", "namespace"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "config.PropertiesFileDeclared", "data": {
+  "config_id": "app-config",
+  "description": "Application configuration for the Demo Service"
+}}
+{"type": "config.NamespaceDeclared", "data": {
+  "config_id": "app-config",
+  "namespace": "app",
+  "description": "General application settings"
+}}
+{"type": "config.NamespaceDeclared", "data": {
+  "config_id": "app-config",
+  "namespace": "db",
+  "description": "Database connection parameters"
+}}
+{"type": "config.PropertySet", "data": {
+  "config_id": "app-config",
+  "key": "app.name",
+  "value": "My Demo App",
+  "comment": "Displayed in the UI header"
+}}
+{"type": "config.PropertySet", "data": {
+  "config_id": "app-config",
+  "key": "db.host",
+  "value": "localhost",
+  "comment": "Local development DB host"
+}}
+{"type": "config.PropertySet", "data": {
+  "config_id": "app-config",
+  "key": "feature.new-ui",
+  "value": true,
+  "comment": "Feature toggle for new UI"
+}}
+{"type": "config.PropertySet", "data": {
+  "config_id": "app-config",
+  "key": "db.host",
+  "value": "db.prod.internal",
+  "comment": "Switched to production DB host"
+}}
+{"type": "config.PropertyRemoved", "data": {
+  "config_id": "app-config",
+  "key": "feature.new-ui"
+}}
+

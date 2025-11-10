@@ -1,0 +1,259 @@
+{"type": "TypeDeclared", "data": {
+  "name": "TypeDeclared",
+  "log": "TypeDeclared declared itself.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": { "type": "string" },
+      "log": { "type": "string" },
+      "schema": { "type": "object" }
+    },
+    "required": ["name", "schema"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.ApiSpecificationDeclared",
+  "log": "Declares a new OpenAPI specification root.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "title": { "type": "string" },
+      "version": { "type": "string" },
+      "openapi_version": { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["spec_id", "title", "version"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.ServerAdded",
+  "log": "Adds a server entry to the OpenAPI spec.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "url": { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["spec_id", "url"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.SchemaDeclared",
+  "log": "Declares a reusable schema under components.schemas.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "name": { "type": "string" },
+      "schema": { "type": "object" }
+    },
+    "required": ["spec_id", "name", "schema"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.PathAdded",
+  "log": "Adds a path item to the spec.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "path": { "type": "string" },
+      "summary": { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["spec_id", "path"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.OperationAdded",
+  "log": "Adds an operation (GET/PUT/POST/...) under a path.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "path": { "type": "string" },
+      "method": { "type": "string" },
+      "operation_id": { "type": "string" },
+      "summary": { "type": "string" },
+      "description": { "type": "string" },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": ["spec_id", "path", "method", "operation_id"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.OperationParameterAdded",
+  "log": "Adds a parameter to an operation.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "path": { "type": "string" },
+      "method": { "type": "string" },
+      "name": { "type": "string" },
+      "in": { "type": "string" },
+      "required": { "type": "boolean" },
+      "description": { "type": "string" },
+      "schema": { "type": "object" },
+      "ref": { "type": "string" }
+    },
+    "required": ["spec_id", "path", "method", "name", "in"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.OperationRequestSet",
+  "log": "Sets the requestBody on an operation.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "path": { "type": "string" },
+      "method": { "type": "string" },
+      "request_body": { "type": "object" }
+    },
+    "required": ["spec_id", "path", "method", "request_body"],
+    "additionalProperties": false
+  }
+}}
+{"type": "TypeDeclared", "data": {
+  "name": "openapi.OperationResponseAdded",
+  "log": "Adds or replaces a response on an operation.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "spec_id": { "type": "string" },
+      "path": { "type": "string" },
+      "method": { "type": "string" },
+      "status_code": { "type": "string" },
+      "description": { "type": "string" },
+      "content": { "type": "object" }
+    },
+    "required": ["spec_id", "path", "method", "status_code", "description"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "openapi.ApiSpecificationDeclared", "data": {
+  "spec_id": "todo-api",
+  "title": "Todo API",
+  "version": "1.0.0",
+  "openapi_version": "3.1.0",
+  "description": "Simple TODO API defined through ESML events."
+}}
+{"type": "openapi.ServerAdded", "data": {
+  "spec_id": "todo-api",
+  "url": "https://api.example.com",
+  "description": "Production server"
+}}
+
+{"type": "openapi.SchemaDeclared", "data": {
+  "spec_id": "todo-api",
+  "name": "Todo",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "title": { "type": "string" },
+      "completed": { "type": "boolean" }
+    },
+    "required": ["id", "title"],
+    "additionalProperties": false
+  }
+}}
+{"type": "openapi.SchemaDeclared", "data": {
+  "spec_id": "todo-api",
+  "name": "TodoList",
+  "schema": {
+    "type": "array",
+    "items": { "$ref": "#/components/schemas/Todo" }
+  }
+}}
+
+{"type": "openapi.PathAdded", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos",
+  "summary": "List todos"
+}}
+{"type": "openapi.OperationAdded", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos",
+  "method": "get",
+  "operation_id": "listTodos",
+  "summary": "List all todos",
+  "description": "Returns an array of todo items",
+  "tags": ["todos"]
+}}
+{"type": "openapi.OperationResponseAdded", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos",
+  "method": "get",
+  "status_code": "200",
+  "description": "OK",
+  "content": {
+    "application/json": {
+      "schema": { "$ref": "#/components/schemas/TodoList" }
+    }
+  }
+}}
+
+{"type": "openapi.PathAdded", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos/{id}",
+  "summary": "Update a todo by id"
+}}
+{"type": "openapi.OperationAdded", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos/{id}",
+  "method": "put",
+  "operation_id": "updateTodo",
+  "summary": "Update todo",
+  "description": "Replaces the todo with the given id",
+  "tags": ["todos"]
+}}
+{"type": "openapi.OperationParameterAdded", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos/{id}",
+  "method": "put",
+  "name": "id",
+  "in": "path",
+  "required": true,
+  "description": "Todo identifier",
+  "schema": { "type": "string" }
+}}
+{"type": "openapi.OperationRequestSet", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos/{id}",
+  "method": "put",
+  "request_body": {
+    "required": true,
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "#/components/schemas/Todo" }
+      }
+    }
+  }
+}}
+{"type": "openapi.OperationResponseAdded", "data": {
+  "spec_id": "todo-api",
+  "path": "/todos/{id}",
+  "method": "put",
+  "status_code": "200",
+  "description": "Updated",
+  "content": {
+    "application/json": {
+      "schema": { "$ref": "#/components/schemas/Todo" }
+    }
+  }
+}}
