@@ -248,6 +248,12 @@ Alternatively it can provide a summary with the types defined and the count of e
 python eventstoreml.py --summary mymodel.esml
 ```
 
+EventStoreML files need not stick to "one json object per line" but for tools like `jq` this is needed. Here's how to feed jq what it needs:
+
+```bash
+python eventstoreml.py --jsonl mymodel.esml | jq .
+```
+
 ---
 
 ## Roadmap
