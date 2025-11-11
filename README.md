@@ -24,7 +24,7 @@ Fancy a complication of the complication? Try chatting with [The EventStoreMLer]
 
 ## Why EventStoreML
 
-EventStoreML is based on the event sourcing idea that a system’s state is often better derived from a complete, ordered log of all events that have occurred, rather than storing only the latest state. Instead of storing objects and their mutable state, we capture both **facts** and their **schemas** as events.
+EventStoreML is based on the event sourcing idea that a system’s state is often better derived from a complete, ordered log of all events that have occurred, rather than storing only the latest state. Instead of storing objects and their mutable state, we capture both **facts** and their **schemas** as events in a **single file**.
 
 This has several advantages:
 
