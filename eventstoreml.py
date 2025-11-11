@@ -415,16 +415,37 @@ class ESMLValidator:
 # ------------- CLI -------------
 
 
+def export_jsonl(path: str) -> None:
+    """Read ESML and emit each JSON object as a single line to stdout."""
+    import json, sys
+    with open(path, 'r', encoding='utf-8') as f:
+        text = f.read()
+    decoder = json.JSONDecoder()
+    idx = 0
+    n = len(text)
+    while idx < n:
+        while idx < n and text[idx].isspace():
+            idx += 1
+        if idx >= n:
+            break
+        obj, end = decoder.raw_decode(text, idx)
+        sys.stdout.write(json.dumps(obj, separators=(',', ':')) + '\n')
+        idx = end
+
 def main() -> None:
     if len(sys.argv) < 2:
         print("EventStoreML — ESML validator")
-        print("Usage: python eventstoreml.py [--summary] <file.esml>")
+        print("Usage: python eventstoreml.py [--summary|--jsonl] <file.esml>")
         sys.exit(1)
 
     args = sys.argv[1:]
     collect_summary = False
-    if args and args[0] == "--summary":
-        collect_summary = True
+    export_jsonl_flag = False
+    if args and args[0] in ('--summary', '--jsonl'):
+        if args[0] == '--summary':
+            collect_summary = True
+        else:
+            export_jsonl_flag = True
         args = args[1:]
 
     if not args:
@@ -433,6 +454,9 @@ def main() -> None:
 
     path = args[0]
 
+    if export_jsonl_flag:
+        export_jsonl(path)
+        return
     validator = ESMLValidator(collect_summary=collect_summary)
     try:
         validator.validate_file(path)
