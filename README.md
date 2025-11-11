@@ -1,4 +1,4 @@
-# EventStoreML — a lightweight markup language for event-sourced models and documents
+# EventStoreML
 
 **EventStoreML** — a lightweight markup language for event-sourced models and documents.
 
