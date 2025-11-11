@@ -279,3 +279,9 @@ Feedback and contributions are welcome! Nonsense? Useful? Suggestions?
 
 MIT License  
 Copyright (c) 2025 EventStoreML contributors
+---
+
+## Final Words
+
+While ESML uses a sequence of JSON objects as its native form, the same idea can live in other serializations too. So while not really desirable an ESXML (XML with XSD schema for type declarations) or ESYML (YAML) format is in principle possible.
+
