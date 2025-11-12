@@ -279,11 +279,12 @@ Feedback and contributions are welcome! Nonsense? Useful? Suggestions?
 
 MIT License  
 Copyright (c) 2025 EventStoreML contributors
+
 ---
 
 ## Final Thoughts
 
 While EventStoreML uses a sequence of JSON objects as its native form, the same idea can live in other serializations too. So while not really desirable, an ESXML (XML with XSD schema for type declarations) or ESYML (YAML) format is in principle possible.
 
-The initial types an `.esml` file declares at its start usually act as the frame that defines the purpose of the file. And it can be expected that specific purposes should have their own file extensions. Should you prefer to convey both aspects, simply append your extension to the `.esml` as in `.esml.foo` or, if this were to cause confusion, add your extension in front as in `.bpmn.esml` for instance.
+The initial types an `.esml` file declares at its start usually act as the frame that defines the purpose of the file. And so it can be expected that specific purposes should have their own file extensions. Should you prefer to convey both aspects, simply append your extension to the `.esml` as in `.esml.foo` or, if this were to cause confusion, add your extension in front as in `.bpmn.esml` for instance.
 
