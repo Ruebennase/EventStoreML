@@ -1,7 +1,7 @@
 # Digital Thread Modeling Events — EventStoreML Inspiration
 
-This document presents a concise yet comprehensive taxonomy of **Digital Thread events** suitable for EventStoreML-based modeling.  
-Like the ArchiMate exploration, this is just an experimental **conceptual catalog** of lifecycle-spanning event types
+This document presents a concise yet comprehensive taxonomy of **Digital Thread events** suitable for EventStoreML-based recording.  
+Like the ArchiMate exploration, this is just an experimental **conceptual catalog** of lifecycle-spanning event types.
 
 The goal:  
 Capture the full flow of a product from **concept → design → manufacturing → operation → service → retirement**, enabling full traceability, time-travel, variant tracking, and dependency analysis.
