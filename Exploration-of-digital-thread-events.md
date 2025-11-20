@@ -1,287 +1,188 @@
 # Digital Thread Modeling Events — EventStoreML Inspiration
 
-This document presents a concise yet comprehensive taxonomy of **Digital Thread events** suitable for EventStoreML-based recording.  
-Like the ArchiMate exploration, this is just an experimental **conceptual catalog** of lifecycle-spanning event types.
+This document presents a concise yet comprehensive taxonomy of **Digital Thread events** suitable for EventStoreML-based modeling.  
+Like the ArchiMate exploration, this is just an experimental **conceptual catalog** of lifecycle-spanning event types
 
 The goal:  
 Capture the full flow of a product from **concept → design → manufacturing → operation → service → retirement**, enabling full traceability, time-travel, variant tracking, and dependency analysis.
 
 ---
 
-# Layer 1 — Requirements & Concept Phase
+# 1. Requirements & Intent
 
 ```
-dt.RequirementProposed
-dt.RequirementRefined
-dt.RequirementApproved
-dt.RequirementRejected
-dt.RequirementVersioned
-dt.RequirementLinkedToStakeholder
-dt.StakeholderIdentified
-dt.StakeholderUpdated
-dt.UseCaseDefined
-dt.UseCaseUpdated
-dt.SystemContextEstablished
-dt.CustomerNeedCaptured
-dt.CustomerNeedUpdated
+dt.StakeholderNeedIdentified
+dt.RequirementCommitted
+dt.RequirementValidated
+dt.RequirementWithdrawn
+dt.RequirementDerived
+dt.RequirementLinkedToUseCase
+dt.RequirementLinkedToRegulation
+dt.RequirementRationaleRecorded
 ```
 
 ---
 
-# Layer 2 — System Architecture & MBSE
+# 2. System Architecture (MBSE)
 
 ```
-dt.SystemArchitectureDrafted
-dt.SystemBlockDefined
-dt.SystemBlockUpdated
-dt.SystemInterfaceDefined
-dt.SystemInterfaceUpdated
-dt.SysmlModelImported
-dt.SysmlElementLinked
-dt.SysmlElementUnlinked
+dt.FunctionIntroduced
+dt.FunctionDecomposed
 dt.FunctionAllocatedToComponent
-dt.RequirementLinkedToFunction
-dt.RequirementUnlinked
+dt.InterfaceContractEstablished
+dt.ArchitecturePatternChosen
 dt.LogicalArchitectureEstablished
 dt.PhysicalArchitectureEstablished
+dt.InterfaceConstraintDeclared
 ```
 
 ---
 
-# Layer 3 — Product Structure & BOM Evolution
+# 3. Product Definition
 
 ```
-dt.ProductStructureDefined
-dt.PartCreated
-dt.PartUpdated
-dt.PartDeleted
-dt.BomItemAdded
-dt.BomItemRemoved
-dt.BomItemQuantityChanged
-dt.BomVariantDefined
-dt.BomVariantApplied
-dt.BomRevisionCreated
+dt.ComponentDefined
+dt.ComponentVersionReleased
+dt.ComponentObsoleted
+dt.ComponentRenamedForClarity
+dt.ComponentSplitForComplexityManagement
+dt.PartMaterialChosenForPerformance
+dt.PartMaterialChangedForCompliance
+dt.InterfaceStandardAdopted
+dt.DesignDecisionCaptured
+```
+
+---
+
+# 4. BOM (Bill of Materials) — Causal, Not CRUD
+
+```
+dt.BomItemAddedForNewFunctionality
+dt.BomItemAddedToMeetRequirement
+dt.BomItemRemovedAfterDesignOptimization
+dt.BomItemRemovedDueToSupplierIssue
+dt.BomItemSubstitutedForObsolescence
+dt.BomItemReassignedToAssembly
+dt.BomItemQuantityAdjustedForStrength
+dt.BomVariantOptionApplied
 dt.ConfigurationBaselineCreated
 ```
 
 ---
 
-# Layer 4 — CAD & Geometry Evolution
+# 5. Manufacturing Process (PPR: Process)
 
 ```
-dt.CadModelImported
-dt.CadModelVersioned
-dt.CadModelReleased
-dt.CadModelSuperseded
-dt.CadFeatureAdded
-dt.CadFeatureModified
-dt.CadFeatureRemoved
-dt.CadFileLinkedToPart
-dt.CadSimulationRun
-dt.CadSimulationResultStored
+dt.ManufacturingStrategyChosen
+dt.ProcessCapabilityEstablished
+dt.ProcessStepAddedToMeetDesignIntent
+dt.ProcessStepModifiedForEfficiency
+dt.ProcessStepRemovedAfterRedesign
+dt.ToolingConceptDefined
+dt.ToolingStrategyChangedDueToRisk
+dt.ManufacturingReadinessAchieved
 ```
 
 ---
 
-# Layer 5 — Change & Configuration Management
+# 6. Resource Model (PPR: Resource)
 
 ```
-dt.ChangeRequestSubmitted
-dt.ChangeRequestReviewed
-dt.ChangeRequestApproved
-dt.ChangeRequestRejected
-dt.EngineeringChangeOrderCreated
-dt.EngineeringChangeOrderImplemented
-dt.DeviationApproved
-dt.NonconformanceDetected
-dt.NonconformanceResolved
-dt.ConfigurationStateRecorded
-dt.VariantOptionDefined
-dt.VariantOptionUpdated
+dt.MachineCapabilityDeclared
+dt.ResourceQualified
+dt.ResourceRetiredDueToObsolescence
+dt.ToolCalibrationRequirementIntroduced
+dt.WorkerSkillRequirementDeclared
+dt.ResourceConstraintIdentified
 ```
 
 ---
 
-# Layer 6 — Manufacturing Planning (PPR: Process)
+# 7. Verification, Validation & Quality
 
 ```
-dt.ProcessPlanDefined
-dt.ProcessStepAdded
-dt.ProcessStepUpdated
-dt.ProcessStepRemoved
-dt.RoutingCreated
-dt.RoutingOperationAdded
-dt.RoutingOperationUpdated
-dt.RoutingOperationRemoved
-dt.ToolAssignedToOperation
-dt.ManufacturingCapabilityLinked
-dt.MachineProgramUploaded
-dt.MachineProgramVersioned
+dt.ValidationObjectiveDefined
+dt.RequirementVerificationPassed
+dt.RequirementVerificationFailed
+dt.TestEvidenceAccepted
+dt.FailureModeIdentified
+dt.RiskMitigationChosen
+dt.QualityIssueIdentified
+dt.QualityIssueResolved
 ```
 
 ---
 
-# Layer 7 — Resources (PPR: Resource)
+# 8. Change & Configuration
 
 ```
-dt.ResourceDeclared
-dt.ResourceRetired
-dt.ToolRegistered
-dt.ToolCalibrationRecorded
-dt.MachineInstalled
-dt.MachineCapabilityUpdated
-dt.SkillProfileDefined
-dt.SkillProfileUpdated
-dt.WorkerQualificationRecorded
-```
-
----
-
-# Layer 8 — Simulation, Testing & Validation
-
-```
-dt.TestPlanCreated
-dt.TestCaseDefined
-dt.TestCaseExecuted
-dt.TestPassed
-dt.TestFailed
-dt.TestResultLinkedToRequirement
-dt.ValidationReportGenerated
-dt.VerificationCompleted
-dt.ModelBasedAnalysisRun
-dt.ModelBasedAnalysisResultStored
+dt.ChangeReasonCaptured
+dt.ChangeApproved
+dt.ChangeRejected
+dt.ChangeJustifiedByIssue
+dt.ChangeLinkedToRequirement
+dt.ChangeLinkedToRegulation
+dt.ChangeImplemented
+dt.VariantStrategyIntroduced
+dt.DesignIntentReaffirmed
 ```
 
 ---
 
-# Layer 9 — Production Execution & Quality
+# 9. Production & Serial Lifecycle
 
 ```
-dt.ProductionStarted
 dt.UnitBuilt
 dt.UnitSerialized
-dt.UnitInspected
-dt.UnitApproved
-dt.UnitRejected
-dt.QualityCheckPerformed
-dt.QualityIssueLogged
-dt.QualityIssueResolved
-dt.TraceabilityRecordUpdated
+dt.UnitApprovedForDelivery
+dt.UnitRejectedForNonconformance
+dt.UnitConfigurationCaptured
+dt.TraceabilityRecordEstablished
 ```
 
 ---
 
-# Layer 10 — Delivery, Operation & Service (Digital Twin lifecycle)
+# 10. Operation & Service (Digital Twin lifecycle)
 
 ```
-dt.ProductShipped
 dt.ProductInstalled
-dt.OperationalDataStreamReceived
-dt.SensorReadingCaptured
-dt.FailureReported
-dt.RootCauseAnalysisCompleted
-dt.ServiceOperationPerformed
+dt.OperationalBehaviorObserved
+dt.PerformanceTrendDetected
+dt.FailureModeOccurredInField
+dt.ServiceActionPerformed
 dt.SoftwareUpdateDeployed
-dt.UsageProfileUpdated
-dt.ReturnMerchandiseAuthorized
+dt.RootCauseAnalysisCompleted
+dt.UsagePatternShiftDetected
 ```
 
 ---
 
-# Layer 11 — Compliance & Regulatory
+# 11. Compliance & Regulatory
 
 ```
-dt.RegulationLinked
-dt.RegulationUpdated
+dt.RegulationLinkedToRequirement
+dt.ComplianceEvidenceProvided
 dt.ComplianceCheckPassed
 dt.ComplianceCheckFailed
-dt.AuditRecordCreated
-dt.AuditIssueRaised
-dt.AuditIssueResolved
+dt.AuditFindingRaised
+dt.AuditFindingResolved
 ```
 
 ---
 
-# Layer 12 — End-of-Life & Sustainability
+# 12. Sustainability & End-of-Life
 
 ```
 dt.ProductRetired
-dt.ProductRecycled
-dt.MaterialRecovered
-dt.MaterialDisposalRecorded
-dt.EnvironmentalAssessmentGenerated
-dt.EnergyProfileRecorded
-```
-
----
-
-# Layer 13 — Cross-Domain Integration Events
-
-```
-dt.ErpRecordLinked
-dt.MesRecordLinked
-dt.AlmRecordLinked
-dt.EcmRecordLinked
-dt.ExternalModelImported
-dt.ExternalModelUpdated
-dt.ExternalModelRetired
-dt.TraceLinkEstablished
-dt.TraceLinkRemoved
-```
-
----
-
-# Layer 14 — Collaboration, Review & Governance
-
-```
-dt.ChangeBoardReviewStarted
-dt.ChangeBoardReviewCompleted
-dt.ReviewCommentAdded
-dt.ReviewCommentResolved
-dt.AnnotationAdded
-dt.AnnotationRemoved
-dt.ModelLocked
-dt.ModelUnlocked
-dt.MergeConflictDetected
-dt.MergeConflictResolved
-```
-
----
-
-# Layer 15 — Meta-Model & Data Fabric Evolution
-
-```
-dt.EntityTypeDeclared
-dt.EntityTypeDeprecated
-dt.RelationshipTypeDeclared
-dt.RelationshipTypeDeprecated
-dt.SemanticConstraintAdded
-dt.SemanticConstraintRemoved
-dt.DataModelExtended
-dt.DataModelRefactored
+dt.MaterialRecycled
+dt.MaterialSubstitutionForSustainability
+dt.EnvironmentalImpactAssessed
+dt.ReusePathEstablished
 ```
 
 ---
 
 # Summary
 
-This taxonomy spans the entire digital thread:
-
-- Requirements  
-- Architecture (MBSE)  
-- Product structure  
-- CAD/geometry  
-- Manufacturing planning (PPR)  
-- Resource models  
-- Change & configuration  
-- Validation & test  
-- Production  
-- Field operation & digital twin  
-- Compliance  
-- End-of-life  
-- Cross-system linking  
-- Governance  
-- Meta-model evolution  
-
-Its intent is inspiration for EventStoreML usage — a full lifecycle vocabulary enabling time-travel, traceability, simulation, dependency investigation, and multiple forms of state projection.
-
+These events represent **meaning**, not tool operations.  
+They are stable across tools, standards, and decades — the essence of a Digital Thread.  
