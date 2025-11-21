@@ -1,0 +1,108 @@
+{"type":"TypeDeclared","data":{"name":"TypeDeclared","log":"TypeDeclared declared itself.","schema":{"type":"object","properties":{"name":{"type":"string"},"log":{"type":"string"},"schema":{"type":"object"}},"required":["name","schema"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.struct.Explanation","log":"The c4.struct.Explanation structure type was declared.","schema":{"type":"object","properties":{"text":{"type":"string"},"author":{"type":"string"},"at":{"type":"string","description":"ISO timestamp"},"tags":{"type":"array","items":{"type":"string"}}},"required":["text"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.WorkspaceStarted","log":"A new Structurizr workspace was started.","schema":{"type":"object","properties":{"workspace_id":{"type":"string"},"name":{"type":"string"},"description":{"type":"string"},"extends":{"type":"string"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["workspace_id"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.WorkspacePropertySet","log":"A workspace property was set or updated.","schema":{"type":"object","properties":{"workspace_id":{"type":"string"},"key":{"type":"string"},"value":{},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["workspace_id","key","value"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.ElementDeclared","log":"A C4 model element was declared.","schema":{"type":"object","properties":{"element_id":{"type":"string"},"kind":{"type":"string","enum":["person","softwareSystem","container","component","deploymentNode","infrastructureNode","softwareSystemInstance","containerInstance","custom"]},"name":{"type":"string"},"description":{"type":"string"},"technology":{"type":"string"},"parent_id":{"type":"string"},"tags":{"type":"array","items":{"type":"string"}},"properties":{"type":"object"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["element_id","kind","name"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.ElementTagged","log":"Tags were added to a C4 element.","schema":{"type":"object","properties":{"element_id":{"type":"string"},"tags_added":{"type":"array","items":{"type":"string"}},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["element_id","tags_added"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.RelationshipDeclared","log":"A relationship between two C4 elements was declared.","schema":{"type":"object","properties":{"relationship_id":{"type":"string"},"source_id":{"type":"string"},"destination_id":{"type":"string"},"description":{"type":"string"},"technology":{"type":"string"},"interaction_style":{"type":"string","enum":["Synchronous","Asynchronous"]},"tags":{"type":"array","items":{"type":"string"}},"properties":{"type":"object"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["relationship_id","source_id","destination_id"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.ViewDeclared","log":"A diagram view was declared.","schema":{"type":"object","properties":{"view_id":{"type":"string"},"kind":{"type":"string","enum":["systemLandscape","systemContext","container","component","dynamic","deployment","filtered","custom"]},"scope_element_id":{"type":"string"},"key":{"type":"string"},"title":{"type":"string"},"description":{"type":"string"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["view_id","kind"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.ViewElementIncluded","log":"An element was included in a view.","schema":{"type":"object","properties":{"view_id":{"type":"string"},"element_id":{"type":"string"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["view_id","element_id"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.ViewRelationshipIncluded","log":"A relationship was included in a view.","schema":{"type":"object","properties":{"view_id":{"type":"string"},"relationship_id":{"type":"string"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["view_id","relationship_id"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.ViewAutoLayoutConfigured","log":"Auto-layout settings were configured for a view.","schema":{"type":"object","properties":{"view_id":{"type":"string"},"rank_direction":{"type":"string","enum":["lr","rl","tb","bt"]},"rank_separation":{"type":"number"},"node_separation":{"type":"number"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["view_id","rank_direction"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.ElementStyleDefined","log":"An element style was defined for a tag.","schema":{"type":"object","properties":{"tag":{"type":"string"},"style":{"type":"object"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["tag","style"],"additionalProperties":false}}}
+
+{"type":"TypeDeclared","data":{"name":"c4.RelationshipStyleDefined","log":"A relationship style was defined for a tag.","schema":{"type":"object","properties":{"tag":{"type":"string"},"style":{"type":"object"},"explanation":{"$ref":"#/$defs/c4.struct.Explanation"}},"required":["tag","style"],"additionalProperties":false}}}
+
+{"type":"c4.WorkspaceStarted","data":{"workspace_id":"w.bigbank","name":"Big Bank plc - Internet Banking System","description":"A sample C4 workspace for a retail bank's internet banking platform.","explanation":{"text":"Started from the classic Big Bank example to validate the event vocabulary.","author":"modeler"}}}
+
+{"type":"c4.WorkspacePropertySet","data":{"workspace_id":"w.bigbank","key":"structurizr.dsl.version","value":"1.0","explanation":{"text":"Pinned a DSL version for deterministic projection.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"person.customer","kind":"person","name":"Personal Banking Customer","description":"A customer of the bank, with personal bank accounts.","tags":["Person"],"explanation":{"text":"Primary end user of online banking.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"system.ibs","kind":"softwareSystem","name":"Internet Banking System","description":"Allows customers to view information about their bank accounts and make payments.","tags":["SoftwareSystem"],"explanation":{"text":"The system under design.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"system.email","kind":"softwareSystem","name":"E-mail System","description":"The internal Microsoft Exchange e-mail system.","tags":["SoftwareSystem","External"],"explanation":{"text":"Existing infrastructure outside the IBS boundary.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"system.mainframe","kind":"softwareSystem","name":"Mainframe Banking System","description":"Stores all of the core banking information about customers, accounts, transactions, etc.","tags":["SoftwareSystem","External"],"explanation":{"text":"Core ledger system; IBS integrates with it.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.customer.uses.ibs","source_id":"person.customer","destination_id":"system.ibs","description":"Views account balances and makes payments using","technology":"HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"User-facing interaction.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.ibs.uses.email","source_id":"system.ibs","destination_id":"system.email","description":"Sends e-mail notifications using","technology":"SMTP","interaction_style":"Asynchronous","tags":["Relationship"],"explanation":{"text":"Notification channel for receipts and alerts.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.ibs.uses.mainframe","source_id":"system.ibs","destination_id":"system.mainframe","description":"Gets account information from, and makes payments using","technology":"XML/HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Reads/writes authoritative banking data.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"container.webapp","kind":"container","parent_id":"system.ibs","name":"Web Application","description":"Delivers the internet banking functionality to customers via their web browser.","technology":"Java and Spring MVC","tags":["Container","WebApp"],"explanation":{"text":"Primary UI container.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"container.mobileapp","kind":"container","parent_id":"system.ibs","name":"Mobile App","description":"Provides a limited subset of the internet banking functionality to customers via their mobile device.","technology":"Xamarin","tags":["Container","MobileApp"],"explanation":{"text":"Mobile client container.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"container.api","kind":"container","parent_id":"system.ibs","name":"API Application","description":"Provides internet banking functionality via a JSON/HTTPS API.","technology":"Java and Spring Boot","tags":["Container","API"],"explanation":{"text":"Shared backend for web and mobile.","author":"modeler"}}}
+
+{"type":"c4.ElementDeclared","data":{"element_id":"container.db","kind":"container","parent_id":"system.ibs","name":"Database","description":"Stores user registration information, hashed authentication credentials, access logs, etc.","technology":"Relational Database Schema","tags":["Container","Database"],"explanation":{"text":"Persistence for IBS-specific data.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.customer.uses.webapp","source_id":"person.customer","destination_id":"container.webapp","description":"Uses","technology":"HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Customer uses the web interface.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.customer.uses.mobileapp","source_id":"person.customer","destination_id":"container.mobileapp","description":"Uses","technology":"HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Customer uses the mobile app.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.webapp.calls.api","source_id":"container.webapp","destination_id":"container.api","description":"Calls","technology":"JSON/HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Web UI delegates to backend API.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.mobileapp.calls.api","source_id":"container.mobileapp","destination_id":"container.api","description":"Calls","technology":"JSON/HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Mobile client delegates to backend API.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.api.uses.db","source_id":"container.api","destination_id":"container.db","description":"Reads from and writes to","technology":"JDBC","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"IBS data storage.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.api.uses.mainframe","source_id":"container.api","destination_id":"system.mainframe","description":"Uses","technology":"XML/HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Backend integrates with core banking.","author":"modeler"}}}
+
+{"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.api.uses.email","source_id":"container.api","destination_id":"system.email","description":"Sends e-mail using","technology":"SMTP","interaction_style":"Asynchronous","tags":["Relationship"],"explanation":{"text":"Backend triggers emails.","author":"modeler"}}}
+
+{"type":"c4.ViewDeclared","data":{"view_id":"view.context.ibs","kind":"systemContext","scope_element_id":"system.ibs","key":"SystemContext","title":"System Context - Internet Banking System","description":"The system context view for the Internet Banking System.","explanation":{"text":"First view to communicate boundary and neighbors.","author":"modeler"}}}
+
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.context.ibs","element_id":"person.customer"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.context.ibs","element_id":"system.ibs"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.context.ibs","element_id":"system.email"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.context.ibs","element_id":"system.mainframe"}}
+
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.context.ibs","relationship_id":"rel.customer.uses.ibs"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.context.ibs","relationship_id":"rel.ibs.uses.email"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.context.ibs","relationship_id":"rel.ibs.uses.mainframe"}}
+
+{"type":"c4.ViewAutoLayoutConfigured","data":{"view_id":"view.context.ibs","rank_direction":"lr","explanation":{"text":"Left-to-right makes the user/system boundary easy to read.","author":"modeler"}}}
+
+{"type":"c4.ViewDeclared","data":{"view_id":"view.container.ibs","kind":"container","scope_element_id":"system.ibs","key":"Containers","title":"Containers - Internet Banking System","description":"The container view for the Internet Banking System.","explanation":{"text":"Second view to show major deployable parts.","author":"modeler"}}}
+
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"person.customer"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"system.email"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"system.mainframe"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"container.webapp"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"container.mobileapp"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"container.api"}}
+{"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"container.db"}}
+
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.container.ibs","relationship_id":"rel.customer.uses.webapp"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.container.ibs","relationship_id":"rel.customer.uses.mobileapp"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.container.ibs","relationship_id":"rel.webapp.calls.api"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.container.ibs","relationship_id":"rel.mobileapp.calls.api"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.container.ibs","relationship_id":"rel.api.uses.db"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.container.ibs","relationship_id":"rel.api.uses.mainframe"}}
+{"type":"c4.ViewRelationshipIncluded","data":{"view_id":"view.container.ibs","relationship_id":"rel.api.uses.email"}}
+
+{"type":"c4.ViewAutoLayoutConfigured","data":{"view_id":"view.container.ibs","rank_direction":"lr","explanation":{"text":"Keeps clients left, datastore right, externals outside.","author":"modeler"}}}
+
+{"type":"c4.ElementStyleDefined","data":{"tag":"Person","style":{"shape":"Person","background":"#08427b","color":"#ffffff"},"explanation":{"text":"People should pop and be immediately recognizable.","author":"modeler"}}}
+
+{"type":"c4.ElementStyleDefined","data":{"tag":"SoftwareSystem","style":{"background":"#1168bd","color":"#ffffff"},"explanation":{"text":"Core software systems use the standard blue tone.","author":"modeler"}}}
+
+{"type":"c4.ElementStyleDefined","data":{"tag":"External","style":{"background":"#999999","color":"#ffffff"},"explanation":{"text":"External systems are neutral gray.","author":"modeler"}}}
+
+{"type":"c4.ElementStyleDefined","data":{"tag":"Container","style":{"background":"#438dd5","color":"#ffffff"},"explanation":{"text":"Containers are a lighter blue to distinguish from systems.","author":"modeler"}}}
+
+{"type":"c4.RelationshipStyleDefined","data":{"tag":"Relationship","style":{"thickness":2,"color":"#707070"},"explanation":{"text":"Default relationship styling.","author":"modeler"}}}
