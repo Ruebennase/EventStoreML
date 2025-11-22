@@ -172,7 +172,7 @@ def apply_event(state: C4State, event: Dict[str, Any]):
     if etype == "TypeDeclared":
         return
     # ---------------- Releases ----------------
-    if etype == "c4.ReleaseMarked":
+    if etype == "meta.ReleaseMarked":
         rid = data["release_id"]
         # event index is attached by main() as _index
         marker = dict(data)
@@ -970,11 +970,11 @@ def main():
     ap.add_argument("--max-events", type=int, default=None,
                     help="Replay only first N events")
     ap.add_argument("--until-release", type=str, default=None,
-                    help="Replay events until (and including) the given c4.ReleaseMarked release_id")
+                    help="Replay events until (and including) the given meta.ReleaseMarked release_id")
     ap.add_argument("--include-filtered", action="store_true",
                     help="Include filtered views in Structurizr DSL output (default: omit)")
     ap.add_argument("--list-releases", action="store_true",
-                    help="List all c4.ReleaseMarked anchors found in the stream and exit")
+                    help="List all meta.ReleaseMarked anchors found in the stream and exit")
     args = ap.parse_args()
 
     with open(args.esml_file, "r", encoding="utf-8") as f:
@@ -986,7 +986,7 @@ def main():
         count += 1
         ev["_index"] = count
         apply_event(state, ev)
-        if args.until_release is not None and ev.get("type") == "c4.ReleaseMarked":
+        if args.until_release is not None and ev.get("type") == "meta.ReleaseMarked":
             if ev.get("data", {}).get("release_id") == args.until_release:
                 break
         if args.max_events is not None and count >= args.max_events:

@@ -3,7 +3,7 @@
 {"type":"TypeDeclared","data":{"name":"c4.struct.Explanation","log":"The c4.struct.Explanation structure type was declared.","schema":{"type":"object","properties":{"text":{"type":"string"},"author":{"type":"string"},"at":{"type":"string","description":"ISO timestamp"},"tags":{"type":"array","items":{"type":"string"}}},"required":["text"],"additionalProperties":false}}}
 
 {"type":"TypeDeclared","data":{
-  "name":"c4.ReleaseMarked",
+  "name":"meta.ReleaseMarked",
   "log":"A release marker was recorded in the workspace history.",
   "schema":{
     "type":"object",
@@ -152,13 +152,13 @@
 {"type":"c4.ElementStyleDefined","data":{"tag":"Container","style":{"background":"#438dd5","color":"#ffffff"},"explanation":{"text":"Lighter blue for containers.","author":"modeler","at":"2025-11-21T09:53:00Z"}}}
 {"type":"c4.RelationshipStyleDefined","data":{"tag":"Relationship","style":{"thickness":2,"color":"#707070"},"explanation":{"text":"Default relationship lines.","author":"modeler","at":"2025-11-21T09:54:00Z"}}}
 
-{"type":"c4.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.0","timestamp":"2025-11-21T09:55:00Z","explanation":{"text":"Captured the initial baseline with context + container views and both web and mobile channels.","author":"modeler","at":"2025-11-21T09:55:00Z"}}}
+{"type":"meta.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.0","timestamp":"2025-11-21T09:55:00Z","explanation":{"text":"Captured the initial baseline with context + container views and both web and mobile channels.","author":"modeler","at":"2025-11-21T09:55:00Z"}}}
 
 {"type":"c4.ElementDeclared","data":{"element_id":"person.csrep","kind":"person","name":"Customer Service Representative","description":"Bank staff member handling customer support queries.","tags":["Person","Internal"],"explanation":{"text":"We added a support role to reflect help-desk workflows.","author":"modeler","at":"2025-11-21T10:05:00Z"}}}
 {"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.csrep.uses.ibs","source_id":"person.csrep","destination_id":"system.ibs","description":"Assists customers using","technology":"Web UI","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Support staff uses IBS admin capabilities.","author":"modeler","at":"2025-11-21T10:06:00Z"}}}
 {"type":"c4.ViewElementIncluded","data":{"view_id":"view.context.ibs","element_id":"person.csrep","explanation":{"text":"Context view now shows bank staff actor too.","author":"modeler","at":"2025-11-21T10:07:00Z"}}}
 
-{"type":"c4.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.1","timestamp":"2025-11-21T10:08:00Z","explanation":{"text":"Released the staff-actor update to the context level.","author":"modeler","at":"2025-11-21T10:08:00Z"}}}
+{"type":"meta.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.1","timestamp":"2025-11-21T10:08:00Z","explanation":{"text":"Released the staff-actor update to the context level.","author":"modeler","at":"2025-11-21T10:08:00Z"}}}
 
 {"type":"c4.ElementDeclared","data":{"element_id":"container.auth","kind":"container","parent_id":"system.ibs","name":"Authentication Service","description":"Handles user login, MFA, and session issuance.","technology":"Kotlin + Spring Security","tags":["Container","Security"],"explanation":{"text":"Introduced a dedicated auth service to isolate security concerns.","author":"modeler","at":"2025-11-21T10:20:00Z"}}}
 {"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.api.calls.auth","source_id":"container.api","destination_id":"container.auth","description":"Delegates authentication to","technology":"JSON/HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"API validates tokens via auth service.","author":"modeler","at":"2025-11-21T10:21:00Z"}}}
@@ -166,13 +166,13 @@
 {"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.mobileapp.calls.auth","source_id":"container.mobileapp","destination_id":"container.auth","description":"Uses for login and MFA","technology":"JSON/HTTPS","interaction_style":"Synchronous","tags":["Relationship"],"explanation":{"text":"Mobile app integrates with auth.","author":"modeler","at":"2025-11-21T10:23:00Z"}}}
 {"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"container.auth","explanation":{"text":"Added auth container to the container view.","author":"modeler","at":"2025-11-21T10:24:00Z"}}}
 
-{"type":"c4.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.2","timestamp":"2025-11-21T10:25:00Z","explanation":{"text":"Released dedicated authentication service and its integrations.","author":"modeler","at":"2025-11-21T10:25:00Z"}}}
+{"type":"meta.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.2","timestamp":"2025-11-21T10:25:00Z","explanation":{"text":"Released dedicated authentication service and its integrations.","author":"modeler","at":"2025-11-21T10:25:00Z"}}}
 
 {"type":"c4.ElementRenamed","data":{"element_id":"container.api","old_name":"API Application","new_name":"Banking API","explanation":{"text":"Renamed to clarify domain responsibility.","author":"modeler","at":"2025-11-21T10:35:00Z"}}}
 {"type":"c4.ElementDescriptionChanged","data":{"element_id":"container.api","old_description":"Provides internet banking functionality via JSON/HTTPS API.","new_description":"Provides core banking functions for web and mobile channels.","old_technology":"Java and Spring Boot","new_technology":"Java 21 + Spring Boot 3","explanation":{"text":"Updated description and tech baseline.","author":"modeler","at":"2025-11-21T10:36:00Z"}}}
 {"type":"c4.RelationshipDescriptionChanged","data":{"relationship_id":"rel.api.uses.db","old_technology":"JDBC","new_technology":"R2DBC","explanation":{"text":"Moved to reactive DB access.","author":"modeler","at":"2025-11-21T10:40:00Z"}}}
 
-{"type":"c4.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.3","timestamp":"2025-11-21T10:41:00Z","explanation":{"text":"Released API refactor and reactive database access.","author":"modeler","at":"2025-11-21T10:41:00Z"}}}
+{"type":"meta.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.3","timestamp":"2025-11-21T10:41:00Z","explanation":{"text":"Released API refactor and reactive database access.","author":"modeler","at":"2025-11-21T10:41:00Z"}}}
 
 {"type":"c4.ElementDeclared","data":{"element_id":"container.notifications","kind":"container","parent_id":"system.ibs","name":"Notification Service","description":"Central service for e-mail and push notifications.","technology":"Node.js","tags":["Container"],"explanation":{"text":"Split notifications out of the Banking API.","author":"modeler","at":"2025-11-21T11:00:00Z"}}}
 {"type":"c4.RelationshipDeclared","data":{"relationship_id":"rel.api.calls.notifications","source_id":"container.api","destination_id":"container.notifications","description":"Publishes notification requests to","technology":"AMQP","interaction_style":"Asynchronous","tags":["Relationship"],"explanation":{"text":"Async notifications decouple load spikes.","author":"modeler","at":"2025-11-21T11:01:00Z"}}}
@@ -180,7 +180,7 @@
 {"type":"c4.RelationshipRemoved","data":{"relationship_id":"rel.api.uses.email","explanation":{"text":"Removed because notifications were extracted.","author":"modeler","at":"2025-11-21T11:03:00Z"}}}
 {"type":"c4.ViewElementIncluded","data":{"view_id":"view.container.ibs","element_id":"container.notifications","explanation":{"text":"Container view shows notifications service.","author":"modeler","at":"2025-11-21T11:04:00Z"}}}
 
-{"type":"c4.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.4","timestamp":"2025-11-21T11:05:00Z","explanation":{"text":"Released extraction of notifications into a dedicated service.","author":"modeler","at":"2025-11-21T11:05:00Z"}}}
+{"type":"meta.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.4","timestamp":"2025-11-21T11:05:00Z","explanation":{"text":"Released extraction of notifications into a dedicated service.","author":"modeler","at":"2025-11-21T11:05:00Z"}}}
 
 {"type":"c4.ElementRemoved","data":{"element_id":"container.mobileapp","explanation":{"text":"Mobile channel was sunset; web is primary.","author":"modeler","at":"2025-11-21T11:20:00Z"}}}
 {"type":"c4.ViewElementExcluded","data":{"view_id":"view.container.ibs","element_id":"container.mobileapp","explanation":{"text":"Removed mobile app from container view after decommissioning.","author":"modeler","at":"2025-11-21T11:21:00Z"}}}
@@ -188,11 +188,11 @@
 {"type":"c4.RelationshipRemoved","data":{"relationship_id":"rel.mobileapp.calls.api","explanation":{"text":"Removed with mobile app decommission.","author":"modeler","at":"2025-11-21T11:23:00Z"}}}
 {"type":"c4.RelationshipRemoved","data":{"relationship_id":"rel.mobileapp.calls.auth","explanation":{"text":"Removed with mobile app decommission.","author":"modeler","at":"2025-11-21T11:24:00Z"}}}
 
-{"type":"c4.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.5","timestamp":"2025-11-21T11:25:00Z","explanation":{"text":"Released web-only baseline by decommissioning mobile channel.","author":"modeler","at":"2025-11-21T11:25:00Z"}}}
+{"type":"meta.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.5","timestamp":"2025-11-21T11:25:00Z","explanation":{"text":"Released web-only baseline by decommissioning mobile channel.","author":"modeler","at":"2025-11-21T11:25:00Z"}}}
 
 {"type":"c4.AdrAdded","data":{"workspace_id":"w.bigbank","adr_id":"ADR-001","title":"Extract Notification Service","status":"Accepted","content_ref":"docs/adrs/ADR-001-notifications.md","explanation":{"text":"Recorded rationale for async notifications extraction.","author":"modeler","at":"2025-11-21T11:50:00Z"}}}
 
 {"type":"c4.ElementStyleDefined","data":{"tag":"Security","style":{"background":"#6b2fbc","color":"#ffffff"},"explanation":{"text":"Security-related containers should stand out.","author":"modeler","at":"2025-11-21T12:05:00Z"}}}
 {"type":"c4.ElementStyleDefined","data":{"tag":"Internal","style":{"background":"#0b6b3a","color":"#ffffff"},"explanation":{"text":"Internal actors shown in green.","author":"modeler","at":"2025-11-21T12:06:00Z"}}}
 
-{"type":"c4.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.6","timestamp":"2025-11-21T12:07:00Z","explanation":{"text":"Released documentation and style refinements after structural changes.","author":"modeler","at":"2025-11-21T12:07:00Z"}}}
+{"type":"meta.ReleaseMarked","data":{"workspace_id":"w.bigbank","release_id":"v1.6","timestamp":"2025-11-21T12:07:00Z","explanation":{"text":"Released documentation and style refinements after structural changes.","author":"modeler","at":"2025-11-21T12:07:00Z"}}}
