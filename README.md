@@ -290,3 +290,5 @@ While EventStoreML uses a sequence of JSON objects as its native form, the same 
 
 The initial types an `.esml` file declares at its start usually act as the frame that defines the purpose of the file. And so it can be expected that specific purposes should have their own file extensions. Should you prefer to convey both aspects, simply append your extension to the `.esml` as in `.esml.foo` or, if this were to cause confusion, add your extension in front as in `.bpmn.esml` for instance.
 
+Note that an .esml file can freely mix event types of different domains. For instance, the C4 modeling example has C4 related events but additionally a meta-event for managing releases, an event that has no match in the C4 DSL realm. In a similar fashion additional event types may be useful depending on the application concerned, e.g. a combination of modeling events of different modeling languages (e.g. C4 + BPMN) that might reference each other. Experimental, as said before...
+
