@@ -141,6 +141,7 @@ class C4State:
     styles: Styles = field(default_factory=Styles)
     docs_sections: List[DocsSection] = field(default_factory=list)
     adrs: Dict[str, Adr] = field(default_factory=dict)
+    releases: Dict[str, Dict[str, Any]] = field(default_factory=dict)  # release_id -> marker
 
 
 # =====================================================================
@@ -170,6 +171,15 @@ def apply_event(state: C4State, event: Dict[str, Any]):
 
     if etype == "TypeDeclared":
         return
+    # ---------------- Releases ----------------
+    if etype == "c4.ReleaseMarked":
+        rid = data["release_id"]
+        # event index is attached by main() as _index
+        marker = dict(data)
+        marker["index"] = event.get("_index")
+        state.releases[rid] = marker
+        return
+
 
     # ---------------- Workspace ----------------
     if etype == "c4.WorkspaceStarted":
@@ -857,7 +867,7 @@ def render_docs_and_adrs(state: C4State, indent: str) -> List[str]:
 #   PROJECT-TO-DSL
 # =====================================================================
 
-def project_to_dsl(state: C4State) -> str:
+def project_to_dsl(state: C4State, include_filtered: bool = False) -> str:
     ws = state.workspace
     if not ws:
         return "// No workspace started."
@@ -935,7 +945,8 @@ def project_to_dsl(state: C4State) -> str:
     # views
     out.append("  views {")
     out.extend(render_views(state, "    ", el_map))
-    out.extend(render_filtered_views(state, "    "))
+    if include_filtered:
+        out.extend(render_filtered_views(state, "    "))
 
     # styles (inside views)
     if state.styles.element_styles or state.styles.relationship_styles:
@@ -958,6 +969,12 @@ def main():
     ap.add_argument("esml_file", help="Path to .esml file")
     ap.add_argument("--max-events", type=int, default=None,
                     help="Replay only first N events")
+    ap.add_argument("--until-release", type=str, default=None,
+                    help="Replay events until (and including) the given c4.ReleaseMarked release_id")
+    ap.add_argument("--include-filtered", action="store_true",
+                    help="Include filtered views in Structurizr DSL output (default: omit)")
+    ap.add_argument("--list-releases", action="store_true",
+                    help="List all c4.ReleaseMarked anchors found in the stream and exit")
     args = ap.parse_args()
 
     with open(args.esml_file, "r", encoding="utf-8") as f:
@@ -966,12 +983,31 @@ def main():
     state = C4State()
     count = 0
     for ev in read_esml_events(text):
-        apply_event(state, ev)
         count += 1
+        ev["_index"] = count
+        apply_event(state, ev)
+        if args.until_release is not None and ev.get("type") == "c4.ReleaseMarked":
+            if ev.get("data", {}).get("release_id") == args.until_release:
+                break
         if args.max_events is not None and count >= args.max_events:
             break
 
-    print(project_to_dsl(state))
+    if args.list_releases:
+        # print in chronological order (by index if present)
+        items = list(state.releases.items())
+        def _idx(it):
+            m = it[1].get("index")
+            return m if isinstance(m, int) else 10**12
+        items.sort(key=_idx)
+        for rid, marker in items:
+            name = marker.get("name") or ""
+            ts = marker.get("timestamp") or marker.get("explanation", {}).get("at") or ""
+            desc = marker.get("description") or ""
+            print(f"{rid}\t{name}\t{ts}\t{desc}")
+        return
+
+    # normal projection
+    print(project_to_dsl(state, include_filtered=args.include_filtered))
 
 
 if __name__ == "__main__":
