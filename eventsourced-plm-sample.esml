@@ -1,0 +1,438 @@
+{"type": "TypeDeclared", "data": {
+  "name": "TypeDeclared",
+  "log": "TypeDeclared declared itself.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": { "type": "string" },
+      "log":  { "type": "string" },
+      "schema": { "type": "object" }
+    },
+    "required": ["name", "schema"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationDefined",
+  "log": "A configuration node was defined in the PLM configuration graph.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id":   { "type": "string" },
+      "label":       { "type": "string" },
+      "kind":        { "type": "string",
+                       "description": "e.g. product, part, function-config, requirement-config, asset-state, generic, customer-specific" },
+      "description": { "type": "string" },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": ["config_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationPropertySet",
+  "log": "A property on a configuration node was set or updated.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id": { "type": "string" },
+      "key":       { "type": "string" },
+      "value":     {},
+      "note":      { "type": "string" }
+    },
+    "required": ["config_id", "key", "value"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationSpecialisedAs",
+  "log": "A configuration was recorded as a specialisation of another configuration.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "more_specific_id": { "type": "string" },
+      "more_general_id":  { "type": "string" },
+      "rationale":        { "type": "string" }
+    },
+    "required": ["more_specific_id", "more_general_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationPartOf",
+  "log": "A configuration was recorded as a part of another configuration.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "whole_id":   { "type": "string" },
+      "part_id":    { "type": "string" },
+      "role":       { "type": "string",
+                     "description": "e.g. seat, engine, wiring-guide" },
+      "quantity":   { "type": "number" },
+      "rationale":  { "type": "string" }
+    },
+    "required": ["whole_id", "part_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationSupersededBy",
+  "log": "A configuration was recorded as superseded by another configuration version.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "old_config_id": { "type": "string" },
+      "new_config_id": { "type": "string" },
+      "reason":        { "type": "string" }
+    },
+    "required": ["old_config_id", "new_config_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.FunctionDefined",
+  "log": "A function was defined that configurations may implement.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "function_id": { "type": "string" },
+      "label":       { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["function_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationImplementsFunction",
+  "log": "A configuration was recorded as implementing a function.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id":   { "type": "string" },
+      "function_id": { "type": "string" },
+      "rationale":   { "type": "string" }
+    },
+    "required": ["config_id", "function_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.RequirementDefined",
+  "log": "A requirement was defined that configurations may fulfill.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "requirement_id": { "type": "string" },
+      "label":          { "type": "string" },
+      "description":    { "type": "string" }
+    },
+    "required": ["requirement_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationFulfillsRequirement",
+  "log": "A configuration was recorded as fulfilling a requirement.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id":      { "type": "string" },
+      "requirement_id": { "type": "string" },
+      "rationale":      { "type": "string" }
+    },
+    "required": ["config_id", "requirement_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConstraintDefined",
+  "log": "A constraint was defined that may be satisfied by configurations.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "constraint_id": { "type": "string" },
+      "label":         { "type": "string" },
+      "expression":    { "type": "string",
+                         "description": "Free-form expression, e.g. in a rule language." }
+    },
+    "required": ["constraint_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationSatisfiesConstraint",
+  "log": "A configuration was recorded as satisfying or violating a constraint.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id":     { "type": "string" },
+      "constraint_id": { "type": "string" },
+      "status":        { "type": "string",
+                         "enum": ["satisfied", "violated", "unknown"] },
+      "rationale":     { "type": "string" }
+    },
+    "required": ["config_id", "constraint_id", "status"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ProcessDefined",
+  "log": "A transformation or process was defined that can derive configurations from others.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "process_id":  { "type": "string" },
+      "label":       { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["process_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationDerivedFrom",
+  "log": "A configuration was recorded as derived from another configuration via a process.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "derived_config_id": { "type": "string" },
+      "source_config_id":  { "type": "string" },
+      "process_id":        { "type": "string" },
+      "rationale":         { "type": "string" }
+    },
+    "required": ["derived_config_id", "source_config_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationStateAtTimeRecorded",
+  "log": "A state of a configuration at a specific time was recorded.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "state_id":   { "type": "string" },
+      "config_id":  { "type": "string" },
+      "timestamp":  { "type": "string",
+                     "description": "ISO 8601 timestamp" },
+      "status":     { "type": "string",
+                     "description": "e.g. planned, built, inspected, in-service" },
+      "properties": { "type": "object" }
+    },
+    "required": ["state_id", "config_id", "timestamp"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.AssetDefined",
+  "log": "A real-world asset was defined that configurations may represent.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "asset_id":    { "type": "string" },
+      "label":       { "type": "string" },
+      "description": { "type": "string" }
+    },
+    "required": ["asset_id"],
+    "additionalProperties": false
+  }
+}}
+
+{"type": "TypeDeclared", "data": {
+  "name": "plm.ConfigurationRepresentsAsset",
+  "log": "A configuration representation was linked to a real-world asset.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "config_id":  { "type": "string" },
+      "asset_id":   { "type": "string" },
+      "kind":       { "type": "string",
+                     "description": "e.g. digital-twin, simulation-model, design-model" },
+      "rationale":  { "type": "string" }
+    },
+    "required": ["config_id", "asset_id"],
+    "additionalProperties": false
+  }
+}}
+
+
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.aircraft", "label": "Aircraft", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.cmm", "label": "CMM", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.cmm-riraro-alcantara15", "label": "CMM riraro Alcantara15", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.civil-airplane", "label": "Civil Airplane", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.configuration", "label": "Configuration", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.engine", "label": "Engine", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.engine-cmm", "label": "Engine CMM", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.loap", "label": "LOAP", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.military-airplane", "label": "Military Airplane", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.p-w-canada-pt6-engine", "label": "P&W Canada PT6 Engine", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.p-w-engine", "label": "P&W Engine", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-13", "label": "ac-13", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-13-ngx", "label": "ac-13 NGX", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-32", "label": "ac-32", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-23", "label": "ac-23", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-23-rihanna", "label": "ac-23 Rihanna", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-23-rihanna-seat-1-8", "label": "ac-23 Rihanna Seat 1/8", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-23-rihanna-seat-8", "label": "ac-23 Rihanna Seat *8", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.ac-23-rihanna-seats-cmm", "label": "ac-23 Rihanna Seats CMM", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.part", "label": "Part", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.product", "label": "Product", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.publication", "label": "Publication", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.riraro-alcantara15-cmm", "label": "riraro Alcantara15 CMM", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.riraro-alcantara15-seat", "label": "riraro Alcantara15 Seat", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.riraro-seat", "label": "riraro Seat", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.rihanna-pear-fj33-engine-2", "label": "Rihanna pear FJ33 Engine *2", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.rihanna-pear-fj33-engine-cmm", "label": "Rihanna pear FJ33 Engine CMM", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.seat", "label": "Seat", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.seat-cmm", "label": "Seat CMM", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.simulator", "label": "Simulator", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.pear-engine", "label": "pear Engine", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.pear-fj33-engine-cmm", "label": "pear FJ33 Engine CMM", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.pear-fj44-engine", "label": "pear FJ44 Engine", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.wiring-guide", "label": "Wiring Guide", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.wiring-guide-ac-23", "label": "Wiring Guide ac-23", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationDefined", "data": {"config_id": "cfg.wiring-guide-rihanna-ac-23", "label": "Wiring Guide Rihanna ac-23", "kind": "configuration", "description": ""}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.civil-airplane", "more_general_id": "cfg.aircraft", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.aircraft", "more_general_id": "cfg.product", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.ac-23", "more_general_id": "cfg.civil-airplane", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.ac-13", "more_general_id": "cfg.civil-airplane", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.ac-13-ngx", "more_general_id": "cfg.ac-13", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.military-airplane", "more_general_id": "cfg.aircraft", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.ac-32", "more_general_id": "cfg.military-airplane", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.simulator", "more_general_id": "cfg.product", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.ac-23-rihanna", "more_general_id": "cfg.ac-23", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.product", "more_general_id": "cfg.configuration", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.publication", "more_general_id": "cfg.configuration", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.part", "more_general_id": "cfg.configuration", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.loap", "more_general_id": "cfg.configuration", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.seat", "more_general_id": "cfg.part", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.engine", "more_general_id": "cfg.part", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.cmm", "more_general_id": "cfg.publication", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.wiring-guide", "more_general_id": "cfg.publication", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.p-w-engine", "more_general_id": "cfg.engine", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.p-w-canada-pt6-engine", "more_general_id": "cfg.p-w-engine", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.riraro-seat", "more_general_id": "cfg.seat", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.riraro-alcantara15-seat", "more_general_id": "cfg.riraro-seat", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.wiring-guide-ac-23", "more_general_id": "cfg.wiring-guide", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.ac-23-rihanna-seat-1-8", "more_general_id": "cfg.riraro-alcantara15-seat", "rationale": "spezializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.cmm-riraro-alcantara15", "more_general_id": "cfg.cmm", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.riraro-alcantara15-cmm", "more_general_id": "cfg.cmm-riraro-alcantara15", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.ac-23-rihanna-seats-cmm", "more_general_id": "cfg.riraro-alcantara15-cmm", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.pear-engine", "more_general_id": "cfg.engine", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.pear-fj44-engine", "more_general_id": "cfg.pear-engine", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.engine-cmm", "more_general_id": "cfg.cmm", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.seat-cmm", "more_general_id": "cfg.cmm", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.pear-fj33-engine-cmm", "more_general_id": "cfg.engine-cmm", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.rihanna-pear-fj33-engine-cmm", "more_general_id": "cfg.pear-fj33-engine-cmm", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationSpecialisedAs", "data": {"more_specific_id": "cfg.rihanna-pear-fj33-engine-2", "more_general_id": "cfg.pear-fj44-engine", "rationale": "specializes"}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-23-rihanna", "part_id": "cfg.ac-23-rihanna-seats-cmm", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-23-rihanna", "part_id": "cfg.ac-23-rihanna-seat-8", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-23-rihanna", "part_id": "cfg.wiring-guide-rihanna-ac-23", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.aircraft", "part_id": "cfg.seat", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.aircraft", "part_id": "cfg.engine", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.aircraft", "part_id": "cfg.wiring-guide", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.part", "part_id": "cfg.cmm", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-13", "part_id": "cfg.p-w-engine", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-32", "part_id": "cfg.p-w-engine", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-23-rihanna", "part_id": "cfg.rihanna-pear-fj33-engine-cmm", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-23", "part_id": "cfg.pear-fj44-engine", "role": "", "quantity": 1, "rationale": ""}}
+
+{"type": "plm.ConfigurationPartOf", "data": {"whole_id": "cfg.ac-23-rihanna", "part_id": "cfg.rihanna-pear-fj33-engine-2", "role": "", "quantity": 1, "rationale": ""}}
